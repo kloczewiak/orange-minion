@@ -92,7 +92,11 @@ export type RewardConfigDto = {
 };
 
 export type NextSeasonMilestonesDto = {
-  requireGradeCounts: object;
+  /**
+   *
+   * Grades required for milestone
+   */
+  requireGradeCounts: { [grade: string]: number };
   /**
    *
    * Reward marks.
@@ -107,7 +111,12 @@ export type NextSeasonMilestonesDto = {
    *
    * Reward configuration.
    */
-  rewardConfig: RewardConfigDto;
+  rewardConfig?: RewardConfigDto;
+  /**
+   *
+   * Sum of all required grades in `requireGradeCounts`
+   */
+  totalGamesRequires: number;
 };
 
 export type ChampionMasteryDto = {
@@ -127,11 +136,6 @@ export type ChampionMasteryDto = {
    * Zero if player reached maximum champion level for this champion.
    */
   championPointsUntilNextLevel: number;
-  /**
-   *
-   * Is chest granted for this champion or not in current season.
-   */
-  chestGranted: boolean;
   /**
    *
    * Champion ID for this entry.

@@ -7,14 +7,6 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      colors: {
-        background: 'var(--background)',
-        'background-dimmed': 'var(--background-dimmed)',
-        foreground: 'var(--foreground)',
-        'foreground-dimmed': 'var(--foreground-dimmed)',
-      },
-    },
     keyframes: {
       shimmer: {
         '100%': {

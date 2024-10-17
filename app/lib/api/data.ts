@@ -72,7 +72,10 @@ export async function getMastery(
     getFetchConfig(),
   );
 
-  if (!response.ok) throw new Error('Failed to fetch mastery data.');
+  if (!response.ok) {
+    console.error('getMastery failed with response:', await response.json());
+    throw new Error('Failed to fetch mastery data.');
+  }
 
   const json = await response.json();
 

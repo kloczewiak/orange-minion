@@ -18,7 +18,10 @@ export async function getAccount(
     getFetchConfig(),
   );
 
-  if (!response.ok) throw new Error('Failed to fetch account data.');
+  if (!response.ok) {
+    console.error('getAccount failed with response:', await response.json());
+    throw new Error('Failed to fetch account data.');
+  }
 
   const json = await response.json();
 
@@ -34,7 +37,10 @@ export async function getSummoner(
     getFetchConfig(),
   );
 
-  if (!response.ok) throw new Error('Failed to fetch summoner data.');
+  if (!response.ok) {
+    console.error('getAccount failed with response:', await response.json());
+    throw new Error('Failed to fetch summoner data.');
+  }
 
   const json = await response.json();
 
@@ -71,4 +77,15 @@ export async function getMastery(
   const json = await response.json();
 
   return json;
+}
+
+export async function getMasteryForAccount(
+  name: string,
+  tag: string,
+  region: Region,
+): Promise<ChampionMasteryDto[]> {
+  const { puuid } = await getAccount(name, tag);
+  const mastery = await getMastery(puuid, region);
+
+  return mastery;
 }

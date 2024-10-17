@@ -171,5 +171,44 @@ export type ChampionMasteryDto = {
    * When the championLevel is advanced the tokensEarned resets to 0.
    */
   tokensEarned: number;
-  milestoneGrades: string[];
+  milestoneGrades?: string[];
+};
+
+export type ChampionSummaryItem = {
+  id: number;
+  name: string;
+  alias: string;
+  squarePortraitPath: string;
+  roles: string[];
+};
+
+export type ChampionSkinTable = {
+  [key: string]: any;
+  skins: ChampionSkinsTableItem[];
+};
+
+export type ChampionSkinsTableItem = {
+  id: number;
+  isBase: boolean;
+  name: string;
+  splashPath: string;
+  uncenteredSplashPath: string;
+  tilePath: string;
+  loadScreenPath: string;
+  skinType: string;
+  rarity: string;
+  isLegacy: boolean;
+  splashVideoPath: string;
+  collectionSplashVideoPath: string;
+  collectionCardHoverVideoPath: string;
+  featuresText: string;
+  chromaPath: string;
+  // Don't really need that right now so I won't type it
+  chromas: any[];
+  // I don't know what the type of this is
+  emblems: any;
+  regionRarityId: number;
+  rarityGemPath: string;
+  skinLines: { id: number }[];
+  description: string;
 };

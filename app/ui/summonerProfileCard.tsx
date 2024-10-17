@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { getMastery, getSummonerDetails } from '../lib/api/data';
+import { getSummonerDetails } from '../lib/api/data';
 import { Region } from '../lib/api/riotTypes';
 import { getSummonerIconUrl } from '../lib/api/helperFunctions';
 

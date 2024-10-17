@@ -14,7 +14,6 @@ export default function Page({
   const region = params.region as Region;
   const gameName = params.gameName;
   const tagLine = params.tagLine;
-  console.log('test2');
 
   return (
     <div>

@@ -33,22 +33,22 @@ export const SummonerProfileCard = async ({
 };
 
 const shimmerStyles =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 dark:before:via-white/10 before:to-transparent';
+  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
 export const SummonerProfileCardSkeleton = () => (
   <div className={`flex items-center gap-4`}>
     <div
-      className={`${shimmerStyles} relative overflow-hidden w-[150px] h-[150px] shrink-0 rounded-xl bg-background-dimmed`}
+      className={`${shimmerStyles} relative overflow-hidden w-[150px] h-[150px] shrink-0 rounded-xl bg-slate-100`}
     />
     <div className='flex flex-col text-left'>
       <div
-        className={`${shimmerStyles} relative overflow-hidden text-xl font-semibold w-32 h-6 rounded-md bg-background-dimmed`}
+        className={`${shimmerStyles} relative overflow-hidden text-xl font-semibold w-32 h-6 rounded-md bg-slate-100`}
       ></div>
       <div
-        className={`${shimmerStyles} relative overflow-hidden text-foreground-dimmed mt-1 w-12 h-5 rounded-md bg-background-dimmed`}
+        className={`${shimmerStyles} relative overflow-hidden text-foreground-dimmed mt-1 w-12 h-5 rounded-md bg-slate-100`}
       ></div>
       <div
-        className={`${shimmerStyles} relative overflow-hidden w-20 h-5 mt-1 rounded-md bg-background-dimmed`}
+        className={`${shimmerStyles} relative overflow-hidden w-20 h-5 mt-1 rounded-md bg-slate-100`}
       ></div>
     </div>
   </div>

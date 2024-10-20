@@ -212,3 +212,9 @@ export type ChampionSkinsTableItem = {
   skinLines: { id: number }[];
   description: string;
 };
+
+export type ChampionInfo = {
+  maxNewPlayerLevel: number;
+  freeChampionIdsForNewPlayers: number[];
+  freeChampionIds: number[];
+};

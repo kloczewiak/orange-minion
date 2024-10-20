@@ -3,6 +3,7 @@
 import { getApiUrl, getFetchConfig } from './helperFunctions';
 import {
   AccountDto,
+  ChampionInfo,
   ChampionMasteryDto,
   Region,
   SummonerDTO,
@@ -91,4 +92,25 @@ export async function getMasteryForAccount(
   const mastery = await getMastery(puuid, region);
 
   return mastery;
+}
+
+export async function getChampionRotation(
+  region: Region,
+): Promise<ChampionInfo> {
+  const response = await fetch(
+    `${getApiUrl(region)}/lol/platform/v3/champion-rotations`,
+    getFetchConfig(),
+  );
+
+  if (!response.ok) {
+    console.error(
+      'getChampionRotation failed with response:',
+      await response.json(),
+    );
+    throw new Error('Failed to fetch champion rotation data.');
+  }
+
+  const json = await response.json();
+
+  return json;
 }

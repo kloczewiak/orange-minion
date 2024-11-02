@@ -1,4 +1,5 @@
-import { Region } from '@/app/lib/api/riotTypes';
+import { RegionReadable } from '@/app/lib/api/riotTypes';
+import { getRegionCode } from '@/app/lib/api/typeFunctions';
 import { MasteryList } from '@/app/ui/MasteryCard';
 import {
   SummonerProfileCard,
@@ -11,7 +12,7 @@ export default function Page({
 }: {
   params: { region: string; gameName: string; tagLine: string };
 }) {
-  const region = params.region as Region;
+  const region = getRegionCode(params.region as RegionReadable);
   const gameName = params.gameName;
   const tagLine = params.tagLine;
 

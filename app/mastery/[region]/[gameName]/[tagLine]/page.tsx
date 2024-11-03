@@ -7,11 +7,12 @@ import {
 } from '@/app/ui/summonerProfileCard';
 import { Suspense } from 'react';
 
-export default function Page({
-  params,
-}: {
-  params: { region: string; gameName: string; tagLine: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ region: string; gameName: string; tagLine: string }>;
+  }
+) {
+  const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);
   const gameName = params.gameName;
   const tagLine = params.tagLine;

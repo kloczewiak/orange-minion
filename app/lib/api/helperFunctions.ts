@@ -74,3 +74,29 @@ export const getChampionTileUrl = async (
 
   return adjustedPath;
 };
+
+export const getCluster = (region: Region): Cluster => {
+  switch (region) {
+    case 'NA1':
+    case 'BR1':
+    case 'LA1':
+    case 'LA2':
+      return 'AMERICAS';
+    case 'KR':
+    case 'JP1':
+      return 'ASIA';
+    case 'EUN1':
+    case 'EUW1':
+    case 'ME1':
+    case 'TR1':
+    case 'RU':
+      return 'EUROPE';
+    case 'OC1':
+    case 'PH2':
+    case 'SG2':
+    case 'TH2':
+    case 'TW2':
+    case 'VN2':
+      return 'SEA';
+  }
+};

@@ -21,6 +21,7 @@ export default function Page({
       <div className='mt-4 flex justify-around gap-2 sm:justify-center sm:gap-8'>
         <Suspense fallback={<SummonerProfileCardSkeleton />}>
           <SummonerProfileCard
+            key={`${gameName}#${tagLine}`}
             gameName={gameName}
             tagLine={tagLine}
             region={region}

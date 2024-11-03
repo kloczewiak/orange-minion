@@ -12,7 +12,7 @@ export type AccountDto = {
   tagLine: string;
 };
 
-export type Cluster = 'EUROPE' | 'AMERICAS' | 'ASIA' | 'ESPORTS';
+export type Cluster = 'EUROPE' | 'AMERICAS' | 'ASIA' | 'SEA' | 'ESPORTS';
 export type Region =
   | 'BR1'
   | 'EUN1'

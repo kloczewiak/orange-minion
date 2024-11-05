@@ -181,13 +181,13 @@ function Champion({
           championImageUrl ||
           'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png'
         }
-        width={50}
-        height={50}
+        width={62}
+        height={62}
       />
 
       <div className='flex flex-col'>
         {children}
-        <p>{championLookup.name}</p>
+        <p className='leading-4'>{championLookup.name}</p>
       </div>
     </div>
   ) : (
@@ -198,7 +198,7 @@ function Champion({
 function Items({ itemIDs }: { itemIDs: number[] }) {
   return (
     <div
-      className='grid grid-cols-4 grid-rows-2 gap-0.5 self-start'
+      className='grid grid-cols-4 grid-rows-2 gap-0.5 self-start flex-shrink-0'
       style={{ direction: 'rtl' }}
     >
       {itemIDs.map((itemID, index) => (

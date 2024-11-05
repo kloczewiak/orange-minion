@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useEffect, useState } from 'react';
-import { getCommonMatchIDs } from '../lib/api/data';
+import { getCommonMatchIDs, getPlayerPUUID } from '../lib/api/data';
 import { Champion, Item, Queue, Region } from '../lib/api/riotTypes';
 import { RiotID } from '../lib/api/types';
 import { CommonMatch } from './SingleCommonMatch';
@@ -39,6 +39,8 @@ export function CommonGames({
   const matchIDsToShow = commonMatchIDs?.slice(0, numberOfMatches) ?? [];
   const cluster = getCluster(region);
 
+  const [playerPUUIDs, setPlayerPUUIDs] = useState<string[]>();
+
   useEffect(() => {
     const getCommonGames = async () => {
       const commonGameIDs = await getCommonMatchIDs(
@@ -53,6 +55,11 @@ export function CommonGames({
     getItemsLookupTable().then((d) => setItemsLookup(d));
     getQueuesLookupTable().then((d) => setQueuesLookup(d));
     getChampionsLookupTable().then((d) => setChampionsLookup(d));
+
+    const puuidPromises = [summoner1, summoner2].map((summoner) =>
+      getPlayerPUUID(summoner.gameName, summoner.tagline),
+    );
+    Promise.all(puuidPromises).then((puuids) => setPlayerPUUIDs(puuids));
   }, []);
 
   return (
@@ -64,14 +71,15 @@ export function CommonGames({
           champions: championsLookup,
         }}
       >
-        {matchIDsToShow.map((id) => (
-          <CommonMatch
-            key={id}
-            matchID={id}
-            cluster={cluster}
-            players={[summoner1, summoner2]}
-          />
-        ))}
+        {playerPUUIDs &&
+          matchIDsToShow.map((id) => (
+            <CommonMatch
+              key={id}
+              matchID={id}
+              cluster={cluster}
+              playerPUUIDs={playerPUUIDs}
+            />
+          ))}
       </LookupContext.Provider>
       {commonMatchIDs && commonMatchIDs.length > numberOfMatches && (
         <StyledButton

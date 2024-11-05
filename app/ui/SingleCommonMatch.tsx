@@ -14,11 +14,11 @@ import { toOrdinal } from 'number-to-words';
 export function CommonMatch({
   matchID,
   cluster,
-  players,
+  playerPUUIDs,
 }: {
   matchID: string;
   cluster: Cluster;
-  players: RiotID[];
+  playerPUUIDs: string[];
 }) {
   // const details = await getMatchDetails(matchID, cluster);
   const [details, setDetails] = useState<MatchDto>();
@@ -35,7 +35,7 @@ export function CommonMatch({
     <div>
       {details ? (
         <>
-          <Match details={details} players={players} />
+          <Match details={details} playerPUUIDs={playerPUUIDs} />
           {/* <pre>{JSON.stringify(details, null, 2)}</pre> */}
         </>
       ) : (
@@ -45,19 +45,22 @@ export function CommonMatch({
   );
 }
 
-function Match({ details, players }: { details: MatchDto; players: RiotID[] }) {
+function Match({
+  details,
+  playerPUUIDs,
+}: {
+  details: MatchDto;
+  playerPUUIDs: string[];
+}) {
+  console.log(details);
   const { queues } = useContext(LookupContext);
 
   const queueLookup = queues?.find((queue) => queue.id == details.info.queueId);
 
-  const playersData = players.map(
-    (player) =>
+  const playersData = playerPUUIDs.map(
+    (playerPUUID) =>
       details.info.participants.find(
-        (participant) =>
-          participant.riotIdGameName.toLowerCase() ==
-            player.gameName.toLowerCase() &&
-          participant.riotIdTagline.toLowerCase() ==
-            player.tagline.toLowerCase(),
+        (participant) => participant.puuid == playerPUUID,
       ) as ParticipantDto,
   );
 
@@ -92,10 +95,7 @@ function Match({ details, players }: { details: MatchDto; players: RiotID[] }) {
       </p>
       <div className='grid grid-cols-2 gap-4 mt-1'>
         {playersData.map((playerData) => (
-          <Player
-            key={`${playerData.riotIdGameName}#${playerData.riotIdTagline}`}
-            data={playerData}
-          />
+          <Player key={`${playerData.puuid}`} data={playerData} />
         ))}
       </div>
     </div>
@@ -104,7 +104,7 @@ function Match({ details, players }: { details: MatchDto; players: RiotID[] }) {
 
 function Player({ data }: { data: ParticipantDto }) {
   const winText =
-    data.subteamPlacement == 0
+    !data.subteamPlacement || data.subteamPlacement == 0
       ? data.win
         ? 'Victory'
         : 'Defeat'
@@ -114,10 +114,14 @@ function Player({ data }: { data: ParticipantDto }) {
       className={`rounded-2xl p-2 ${data.win ? 'bg-green-100' : 'bg-red-100'} flex flex-col`}
     >
       <div className='flex justify-between'>
-        <p>
-          {data.riotIdGameName}
-          <span className='text-black/30 ml-1'>#{data.riotIdTagline}</span>
-        </p>
+        {data.riotIdGameName ? (
+          <p>
+            {data.riotIdGameName}
+            <span className='text-black/30 ml-1'>#{data.riotIdTagline}</span>
+          </p>
+        ) : (
+          <p>{data.summonerName}</p>
+        )}
         <p className={`${data.win ? 'text-green-600' : 'text-red-600'}`}>
           {winText}
         </p>

@@ -16,7 +16,7 @@ export async function getAccount(
 ): Promise<AccountDto> {
   const response = await fetch(
     `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
-    getFetchConfig(),
+    { ...getFetchConfig(), ...{ cache: 'force-cache' } },
   );
 
   if (!response.ok) {
@@ -35,7 +35,7 @@ export async function getSummoner(
 ): Promise<SummonerDTO> {
   const response = await fetch(
     `${getApiUrl(region)}/lol/summoner/v4/summoners/by-puuid/${encryptedPUUID}`,
-    getFetchConfig(),
+    { ...getFetchConfig(), ...{ next: { revalidate: 3600 } } },
   );
 
   if (!response.ok) {
@@ -70,7 +70,7 @@ export async function getMastery(
 ): Promise<ChampionMasteryDto[]> {
   const response = await fetch(
     `${getApiUrl(region)}/lol/champion-mastery/v4/champion-masteries/by-puuid/${encryptedPUUID}`,
-    getFetchConfig(),
+    { ...getFetchConfig(), ...{ next: { revalidate: 3600 } } },
   );
 
   if (!response.ok) {

@@ -25,7 +25,7 @@ export function RegionSelect({
   return (
     <StyledSelect value={region} onChange={(e) => handleChange(e.target.value)}>
       {allRegions.map((r) => (
-        <option key={r} value={r}>
+        <option key={r} value={getReadableRegion(r)}>
           {getReadableRegion(r)}
         </option>
       ))}

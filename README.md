@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Orange Minion
+
+Orange Minion is an open-source website offering a collection of tools for [League of Legends](https://www.leagueoflegends.com).
+
+Built with [Next.js](https://nextjs.org), this project provides easy-to-use tools to display champion mastery, track common games with friends, and more in the future.
+
+## Features
+
+### Mastery Viewer
+Easily view and showcase your champion masteries in a visually appealing layout.
+
+![Mastery viewer page](./readmeAssets/masteryPage.png)
+
+### Common Games Viewer
+Quickly view all games you have played with another player, allowing you to analyze your shared history and collaboration.
+
+![Common games viewer page](./readmeAssets/commonGamesPage.png)
+
+## Contributing
+
+Contributions are welcome! If you have an idea for a new feature or improvements, feel free to submit a pull request. Before contributing, please check the [Issues](https://github.com/kloczewiak/orange-minion/issues) tab to see if there are any outstanding items that could use your help.
+
+### How to Contribute
+1. Fork the repository and create a new branch for your feature or fix.
+2. Make your changes, and ensure your code adheres to the project’s coding standards.
+3. Submit a pull request, detailing the changes and why they are beneficial.
 
 ## Getting Started
 
-First, run the development server:
+If you're interested in contributing, follow these instructions to set up a local development environment.
+
+### Prerequisites
+- [pnpm](https://pnpm.io/) (Package manager used for managing project dependencies)
+- A Riot API key, which you can obtain from the [Riot Developer Portal](https://developer.riotgames.com/).
+
+### Installation
+Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add your Riot API key to a `.env.local` file in the project root:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+RIOT_API_KEY=your_riot_api_key_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Running the Development Server
+Start the development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
 
-## Deploy on Vercel
+## Acknowledgments
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- This project was bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- Thanks to the open-source community and League of Legends enthusiasts who help make this project better.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+**Enjoy using Orange Minion, and may your games be ever victorious!**

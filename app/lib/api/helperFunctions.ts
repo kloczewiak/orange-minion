@@ -1,7 +1,10 @@
 import {
+  Champion,
   ChampionSkinTable,
   ChampionSummaryItem,
   Cluster,
+  Item,
+  Queue,
   Region,
 } from './riotTypes';
 
@@ -100,3 +103,39 @@ export const getCluster = (region: Region): Cluster => {
       return 'SEA';
   }
 };
+
+export async function getItemsLookupTable(): Promise<Item[]> {
+  const response = await fetch(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json',
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to get items lookup table.');
+  }
+
+  return await response.json();
+}
+
+export async function getQueuesLookupTable(): Promise<Queue[]> {
+  const response = await fetch(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/queues.json',
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to get queues lookup table.');
+  }
+
+  return await response.json();
+}
+
+export async function getChampionsLookupTable(): Promise<Champion[]> {
+  const response = await fetch(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json',
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to get champions lookup table.');
+  }
+
+  return await response.json();
+}

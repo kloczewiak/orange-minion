@@ -7,11 +7,10 @@ import {
 } from '@/app/ui/summonerProfileCard';
 import { Suspense } from 'react';
 
-export default async function Page(
-  props: {
-    params: Promise<{ region: string; gameName: string; tagLine: string }>;
-  }
-) {
+export default async function Page(props: {
+  params: Promise<{ region: string; gameName: string; tagLine: string }>;
+}) {
+  // TODO: Add proper error handling instead of using error.tsx
   const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);
   const gameName = params.gameName;

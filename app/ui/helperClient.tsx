@@ -28,7 +28,7 @@ export function FullDate({ timestamp }: { timestamp: number }) {
   useEffect(() => {
     const date = TimestampToLocalDate(timestamp);
     setDateString(formatDate(date));
-  });
+  }, []);
 
   return <>{dateString}</>;
 }

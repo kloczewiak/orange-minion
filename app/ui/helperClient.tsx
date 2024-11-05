@@ -1,5 +1,6 @@
 'use client';
 
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 export function LocalDate({ timestamp }: { timestamp: number }) {
@@ -14,4 +15,10 @@ export function LocalDate({ timestamp }: { timestamp: number }) {
   }, []);
 
   return <>{dateString}</>;
+}
+
+export function FullDate({ timestamp }: { timestamp: number }) {
+  const date = new Date(timestamp);
+  const formattedDate = format(date, "MMMM do, yyyy 'at' h:mm a");
+  return <>{formattedDate}</>;
 }

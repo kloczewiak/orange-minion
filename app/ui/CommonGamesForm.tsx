@@ -10,6 +10,7 @@ import {
 import { RegionReadable } from '../lib/api/riotTypes';
 import { useRouter } from 'next/navigation';
 import { toOrdinal } from 'number-to-words';
+import { RegionSelect } from './regionSelect';
 
 export function CommonGamesForm() {
   const { replace } = useRouter();
@@ -51,16 +52,7 @@ export function CommonGamesForm() {
           setTagline={setSummoner2Tagline}
         />
         <div className='flex gap-4'>
-          <StyledSelect
-            value={region}
-            onChange={(e) => setRegion(e.target.value as RegionReadable)}
-          >
-            {allRegions.map((r) => (
-              <option key={r} value={getReadableRegion(r)}>
-                {getReadableRegion(r)}
-              </option>
-            ))}
-          </StyledSelect>
+          <RegionSelect region={region} setRegion={setRegion} />
           <StyledButton>Submit</StyledButton>
         </div>
       </form>

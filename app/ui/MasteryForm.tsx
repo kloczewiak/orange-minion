@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Region } from '../lib/api/riotTypes';
+import { Region, RegionReadable } from '../lib/api/riotTypes';
 import { allRegions, getReadableRegion } from '../lib/api/typeFunctions';
 import {
   Container,
@@ -10,17 +10,18 @@ import {
   StyledInput,
   StyledSelect,
 } from './components';
+import { RegionSelect } from './regionSelect';
 
 export function MasteryForm() {
   const { replace } = useRouter();
-  const [region, setRegion] = useState<Region>('EUN1');
+  const [region, setRegion] = useState<RegionReadable>('EUNE');
   const [gameName, setGameName] = useState<string>('');
   const [tagline, setTagline] = useState<string>('');
 
   const OnSubmit = () => {
     replace(
       '/mastery/' +
-        getReadableRegion(region) +
+        region +
         '/' +
         encodeURIComponent(gameName) +
         '/' +
@@ -62,15 +63,7 @@ export function MasteryForm() {
           />
         </div>
         <div className='flex items-center gap-2 h-10'>
-          <StyledSelect
-            value={region}
-            onChange={(e) => setRegion(e.target.value as Region)}
-            className='h-full'
-          >
-            {allRegions.map((r) => (
-              <option value={r}>{getReadableRegion(r)}</option>
-            ))}
-          </StyledSelect>
+          <RegionSelect region={region} setRegion={setRegion} />
           <StyledButton className='h-full' type='submit'>
             Submit
           </StyledButton>

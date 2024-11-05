@@ -23,11 +23,7 @@ export function RegionSelect({
   };
 
   return (
-    <StyledSelect
-      value={region}
-      onChange={(e) => handleChange(e.target.value)}
-      className='h-full'
-    >
+    <StyledSelect value={region} onChange={(e) => handleChange(e.target.value)}>
       {allRegions.map((r) => (
         <option key={r} value={r}>
           {getReadableRegion(r)}

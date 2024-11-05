@@ -62,7 +62,7 @@ export function MasteryForm() {
             onChange={(e) => setTagline(e.target.value)}
           />
         </div>
-        <div className='flex items-center gap-2 h-10'>
+        <div className='flex gap-2 h-10'>
           <RegionSelect region={region} setRegion={setRegion} />
           <StyledButton className='h-full' type='submit'>
             Submit

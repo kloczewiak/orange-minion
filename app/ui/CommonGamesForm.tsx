@@ -9,6 +9,7 @@ import {
 } from './components';
 import { RegionReadable } from '../lib/api/riotTypes';
 import { useRouter } from 'next/navigation';
+import { toOrdinal } from 'number-to-words';
 
 export function CommonGamesForm() {
   const { replace } = useRouter();
@@ -55,7 +56,7 @@ export function CommonGamesForm() {
             onChange={(e) => setRegion(e.target.value as RegionReadable)}
           >
             {allRegions.map((r) => (
-              <option value={getReadableRegion(r)}>
+              <option key={r} value={getReadableRegion(r)}>
                 {getReadableRegion(r)}
               </option>
             ))}
@@ -82,7 +83,9 @@ function SummonerInput({
 }) {
   return (
     <div className='bg-white rounded-lg p-4 flex flex-col gap-2'>
-      <h3 className='text-lg font-medium'>Summoner {summonerNumber}</h3>
+      <h3 className='text-lg font-medium'>
+        {toOrdinal(summonerNumber)} Summoner
+      </h3>
       <div className='w-full flex items-center justify-between'>
         <label className='mr-3' htmlFor='gamename'>
           Game name

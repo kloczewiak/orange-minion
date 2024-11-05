@@ -212,3 +212,8 @@ export async function getCommonMatchIDs(
 
   return commonGameIDs;
 }
+
+export async function getPlayerPUUID(gameName: string, tagline: string) {
+  const { puuid } = await getAccount(gameName, tagline);
+  return puuid;
+}

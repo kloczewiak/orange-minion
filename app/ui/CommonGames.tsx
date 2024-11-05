@@ -10,6 +10,7 @@ import {
   getItemsLookupTable,
   getQueuesLookupTable,
 } from '../lib/api/helperFunctions';
+import { StyledButton } from './components';
 
 type LookupContextType = {
   items?: Item[];
@@ -33,7 +34,7 @@ export function CommonGames({
   const [championsLookup, setChampionsLookup] = useState<Champion[]>();
 
   const [commonMatchIDs, setCommonMatchIDs] = useState<string[]>();
-  const [numberOfMatches, setNumberOfMatches] = useState<number>(15);
+  const [numberOfMatches, setNumberOfMatches] = useState<number>(10);
 
   const matchIDsToShow = commonMatchIDs?.slice(0, numberOfMatches) ?? [];
   const cluster = getCluster(region);
@@ -72,6 +73,14 @@ export function CommonGames({
           />
         ))}
       </LookupContext.Provider>
+      {commonMatchIDs && commonMatchIDs.length > numberOfMatches && (
+        <StyledButton
+          className='self-end'
+          onClick={() => setNumberOfMatches((n) => n + 10)}
+        >
+          Load More
+        </StyledButton>
+      )}
     </div>
   );
 }

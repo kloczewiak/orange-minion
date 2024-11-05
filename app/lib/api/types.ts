@@ -4,3 +4,8 @@ export type SummonerDetails = {
   profileIconId: number;
   summonerLevel: number;
 };
+
+export type RiotID = {
+  tagline: string;
+  gameName: string;
+};

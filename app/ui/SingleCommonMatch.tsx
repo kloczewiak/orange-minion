@@ -39,7 +39,7 @@ export function CommonMatch({
           {/* <pre>{JSON.stringify(details, null, 2)}</pre> */}
         </>
       ) : (
-        matchID
+        <MatchSkeleton />
       )}
     </div>
   );
@@ -233,5 +233,35 @@ function Item({ itemID }: { itemID: number }) {
       width={30}
       height={30}
     />
+  );
+}
+
+const shimmerStyles =
+  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent relative overflow-hidden';
+
+export function MatchSkeleton() {
+  return (
+    <div
+      className={
+        shimmerStyles + ' w-full h-[194px] bg-slate-100 rounded-[2rem] p-4'
+      }
+    >
+      <div className={shimmerStyles + ' rounded-full h-7 w-64 bg-slate-200'}>
+        &nbsp;
+      </div>
+      <div
+        className={shimmerStyles + ' rounded-full h-5 w-56 bg-slate-200 mt-1'}
+      >
+        &nbsp;
+      </div>
+      <div className='w-full grid grid-cols-2 mt-2 gap-4'>
+        <div className={shimmerStyles + ' h-[102px] rounded-2xl bg-slate-200'}>
+          &nbsp;
+        </div>
+        <div className={shimmerStyles + ' h-[102px] rounded-2xl bg-slate-200'}>
+          &nbsp;
+        </div>
+      </div>
+    </div>
   );
 }

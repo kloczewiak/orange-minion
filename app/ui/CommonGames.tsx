@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 import { getCommonMatchIDs, getPlayerPUUID } from '../lib/api/data';
 import { Champion, Item, Queue, Region } from '../lib/api/riotTypes';
 import { RiotID } from '../lib/api/types';
-import { CommonMatch } from './SingleCommonMatch';
+import { CommonMatch, MatchSkeleton } from './SingleCommonMatch';
 import {
   getChampionsLookupTable,
   getCluster,
@@ -62,6 +62,26 @@ export function CommonGames({
     Promise.all(puuidPromises).then((puuids) => setPlayerPUUIDs(puuids));
   }, []);
 
+  if (commonMatchIDs && commonMatchIDs.length == 0) {
+    return (
+      <div className='flex justify-center'>
+        <p className='text-3xl text-center max-w-lg'>
+          These players have not played together in the last 1000 games
+        </p>
+      </div>
+    );
+  }
+
+  if (!playerPUUIDs || !commonMatchIDs) {
+    return (
+      <div className='flex flex-col gap-6'>
+        {new Array(10).fill('').map((_, index) => (
+          <MatchSkeleton key={index} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className='flex flex-col gap-6'>
       <LookupContext.Provider
@@ -71,15 +91,14 @@ export function CommonGames({
           champions: championsLookup,
         }}
       >
-        {playerPUUIDs &&
-          matchIDsToShow.map((id) => (
-            <CommonMatch
-              key={id}
-              matchID={id}
-              cluster={cluster}
-              playerPUUIDs={playerPUUIDs}
-            />
-          ))}
+        {matchIDsToShow.map((id) => (
+          <CommonMatch
+            key={id}
+            matchID={id}
+            cluster={cluster}
+            playerPUUIDs={playerPUUIDs}
+          />
+        ))}
       </LookupContext.Provider>
       {commonMatchIDs && commonMatchIDs.length > numberOfMatches && (
         <StyledButton

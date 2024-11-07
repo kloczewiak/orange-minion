@@ -11,6 +11,7 @@ import {
 } from './riotTypes';
 import { MatchDto } from './Match5VTypes';
 import { RiotID, SummonerDetails } from './types';
+import { getReadableRegion } from './typeFunctions';
 
 export async function getAccount(
   gameName: string,
@@ -23,7 +24,12 @@ export async function getAccount(
 
   if (!response.ok) {
     console.error('getAccount failed with response:', await response.json());
-    throw new Error('Failed to fetch account data.');
+    if (response.status === 404) {
+      throw new Error('Account not found.', { cause: response.status });
+    }
+    throw new Error('Failed to fetch account data.', {
+      cause: response.status,
+    });
   }
 
   const json = await response.json();
@@ -42,7 +48,9 @@ export async function getSummoner(
 
   if (!response.ok) {
     console.error('getAccount failed with response:', await response.json());
-    throw new Error('Failed to fetch summoner data.');
+    throw new Error('Failed to fetch summoner data.', {
+      cause: response.status,
+    });
   }
 
   const json = await response.json();
@@ -56,14 +64,24 @@ export async function getSummonerDetails(
   region: Region,
 ): Promise<SummonerDetails> {
   const { puuid, tagLine, gameName } = await getAccount(name, tag);
-  const { profileIconId, summonerLevel } = await getSummoner(puuid, region);
 
-  return {
-    tagLine,
-    gameName,
-    profileIconId,
-    summonerLevel,
-  };
+  try {
+    const { profileIconId, summonerLevel } = await getSummoner(puuid, region);
+
+    return {
+      tagLine,
+      gameName,
+      profileIconId,
+      summonerLevel,
+    };
+  } catch (e) {
+    const err = e as Error;
+    console.log(region);
+    throw new Error(
+      `Summoner was not found for this account in ${getReadableRegion(region) ?? region} server.`,
+      { cause: err.cause },
+    );
+  }
 }
 
 export async function getMastery(
@@ -77,7 +95,9 @@ export async function getMastery(
 
   if (!response.ok) {
     console.error('getMastery failed with response:', await response.json());
-    throw new Error('Failed to fetch mastery data.');
+    throw new Error('Failed to fetch mastery data.', {
+      cause: response.status,
+    });
   }
 
   const json = await response.json();
@@ -91,9 +111,16 @@ export async function getMasteryForAccount(
   region: Region,
 ): Promise<ChampionMasteryDto[]> {
   const { puuid } = await getAccount(name, tag);
-  const mastery = await getMastery(puuid, region);
-
-  return mastery;
+  try {
+    const mastery = await getMastery(puuid, region);
+    return mastery;
+  } catch (e) {
+    const err = e as Error;
+    throw new Error(
+      `Summoner was not found for this account in ${getReadableRegion(region) ?? region} server.`,
+      { cause: err.cause },
+    );
+  }
 }
 
 export async function getChampionRotation(
@@ -109,7 +136,9 @@ export async function getChampionRotation(
       'getChampionRotation failed with response:',
       await response.json(),
     );
-    throw new Error('Failed to fetch champion rotation data.');
+    throw new Error('Failed to fetch champion rotation data.', {
+      cause: response.status,
+    });
   }
 
   const json = await response.json();
@@ -135,7 +164,7 @@ export async function getMatchIDs(
 
   if (!response.ok) {
     console.error('getMatchIDs failed with response:', await response.json());
-    throw new Error('Failed to fetch matchIDs.');
+    throw new Error('Failed to fetch matchIDs.', { cause: response.status });
   }
 
   const json = await response.json();
@@ -163,9 +192,16 @@ export async function getAllMatchIDsForAccount(
   region: Region,
 ) {
   const { puuid } = await getAccount(gameName, tagline);
-  const matchIDs = await getAllMatchIDs(puuid, getCluster(region));
-
-  return matchIDs;
+  try {
+    const matchIDs = await getAllMatchIDs(puuid, getCluster(region));
+    return matchIDs;
+  } catch (e) {
+    const err = e as Error;
+    throw new Error(
+      `Summoner was not found for this account in ${getReadableRegion(region) ?? region} server.`,
+      { cause: err.cause },
+    );
+  }
 }
 
 export async function getMatchDetails(
@@ -182,7 +218,9 @@ export async function getMatchDetails(
       'getMatchDetails failed with response:',
       await response.json(),
     );
-    throw new Error('Failed to fetch match details.');
+    throw new Error('Failed to fetch match details.', {
+      cause: response.status,
+    });
   }
 
   const json = await response.json();

@@ -23,7 +23,7 @@ export const MasteryList = async ({
   // masteries.sort(() => Math.random() - 0.5);
 
   return (
-    <div className='mx-auto mt-4 grid w-fit grid-cols-2 gap-4 px-4'>
+    <div className='mx-auto mt-4 grid w-fit grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:px-4'>
       {masteries.map((mastery) => (
         <Suspense
           key={mastery.championId}
@@ -156,7 +156,7 @@ function MasteryProgress({
   return (
     <ul className='ml-1'>
       {totalMarks > 0 && (
-        <li className='flex'>
+        <li className='flex items-center'>
           <Check value={earnedMarks < totalMarks} />
           <p>
             Earned {earnedMarks} out of {totalMarks} Mark
@@ -164,9 +164,9 @@ function MasteryProgress({
           </p>
         </li>
       )}
-      <li className='flex'>
+      <li className='flex items-center'>
         <Check value={ptsUntilNextLvl >= 0} />
-        <p>Reached {nextLevelPts.toLocaleString('en')} Points</p>
+        <p>Reached {nextLevelPts.toLocaleString('en')}&nbsp;Points</p>
       </li>
     </ul>
   );

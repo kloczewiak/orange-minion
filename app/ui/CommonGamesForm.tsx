@@ -29,9 +29,9 @@ export function CommonGamesForm() {
   };
 
   return (
-    <Container>
+    <Container className='w-full min-[384px]:w-auto'>
       <form
-        className='flex flex-col items-end gap-4'
+        className='flex flex-col gap-4'
         onSubmit={(e) => {
           e.preventDefault();
           OnSubmit();
@@ -51,7 +51,7 @@ export function CommonGamesForm() {
           tagline={summoner2Tagline}
           setTagline={setSummoner2Tagline}
         />
-        <div className='flex gap-4'>
+        <div className='flex justify-end gap-4'>
           <RegionSelect region={region} setRegion={setRegion} />
           <StyledButton>Submit</StyledButton>
         </div>
@@ -78,7 +78,7 @@ function SummonerInput({
       <h3 className='text-lg font-medium'>
         {toOrdinal(summonerNumber)} Summoner
       </h3>
-      <div className='w-full flex items-center justify-between'>
+      <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between'>
         <label className='mr-3' htmlFor='gamename'>
           Game name
         </label>
@@ -91,7 +91,7 @@ function SummonerInput({
           required
         />
       </div>
-      <div className='w-full flex items-center justify-between'>
+      <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between'>
         <label className='mr-3' htmlFor='tagline'>
           Tagline
         </label>

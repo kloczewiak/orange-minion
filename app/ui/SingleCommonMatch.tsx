@@ -66,11 +66,14 @@ function Match({
 
   return (
     <div className='bg-slate-100 rounded-[2rem] p-4'>
-      <div className='flex justify-between items-start gap-2'>
+      <div className='flex flex-col sm:flex-row justify-between items-start'>
         <p className='text-2xl font-semibold'>
           {(queueLookup &&
             (queueLookup.detailedDescription || queueLookup.name)) ||
             `Unknown queue - ${details.info.queueId}`}
+        </p>
+        <p className='sm:hidden'>
+          <FullDate timestamp={details.info.gameStartTimestamp} />
         </p>
         <p>
           <a
@@ -90,10 +93,10 @@ function Match({
           </a>
         </p>
       </div>
-      <p>
+      <p className='hidden sm:block'>
         <FullDate timestamp={details.info.gameStartTimestamp} />
       </p>
-      <div className='grid grid-cols-2 gap-4 mt-1'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-1'>
         {playersData.map((playerData) => (
           <Player key={`${playerData.puuid}`} data={playerData} />
         ))}

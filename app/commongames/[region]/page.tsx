@@ -27,7 +27,7 @@ export default async function Page({
 
   return (
     <div className='py-6'>
-      <div className='flex gap-8 justify-center'>
+      <div className='flex flex-col items-center sm:flex-row gap-4 justify-center'>
         {players.map(({ gameName, tagline }) => (
           <Suspense
             key={`${gameName}#${tagline}`}
@@ -41,7 +41,7 @@ export default async function Page({
           </Suspense>
         ))}
       </div>
-      <div className='mx-auto mt-6 max-w-screen-md'>
+      <div className='mx-auto mt-6 max-w-md sm:max-w-screen-md'>
         <CommonGames
           summoner1={players[0]}
           summoner2={players[1]}

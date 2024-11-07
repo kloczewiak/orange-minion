@@ -1,53 +1,37 @@
 'use client';
-
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Region, RegionReadable } from '../lib/api/riotTypes';
-import { allRegions, getReadableRegion } from '../lib/api/typeFunctions';
-import {
-  Container,
-  StyledButton,
-  StyledInput,
-  StyledSelect,
-} from './components';
+import { Container, StyledButton, StyledInput } from './components';
 import { RegionSelect } from './regionSelect';
+import { useActionState, useRef } from 'react';
+import { FormState, action } from './MasteryFormAction';
 
 export function MasteryForm() {
-  const { replace } = useRouter();
-  const [region, setRegion] = useState<RegionReadable>('EUNE');
-  const [gameName, setGameName] = useState<string>('');
-  const [tagline, setTagline] = useState<string>('');
-
-  const OnSubmit = () => {
-    replace(
-      '/mastery/' +
-        region +
-        '/' +
-        encodeURIComponent(gameName) +
-        '/' +
-        encodeURIComponent(tagline),
-    );
+  const initialState: FormState = {
+    form: { gamename: '', tagline: '' },
   };
+  const [state, formAction, isPending] = useActionState(action, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <Container>
       <form
         className='flex flex-col items-end gap-2'
-        onSubmit={(e) => {
-          e.preventDefault();
-          OnSubmit();
+        action={async (formData) => {
+          formAction(formData);
+          if (formRef.current) {
+            formRef.current.reset();
+          }
         }}
+        ref={formRef}
       >
         <div className='w-full flex items-center justify-between'>
           <label className='mr-3' htmlFor='gamename'>
             Game name
           </label>
           <StyledInput
+            defaultValue={state.form.gamename}
             className='border'
             name='gamename'
             type='text'
-            value={gameName}
-            onChange={(e) => setGameName(e.target.value)}
           />
         </div>
         <div className='w-full flex items-center justify-between'>
@@ -55,19 +39,21 @@ export function MasteryForm() {
             Tagline
           </label>
           <StyledInput
+            defaultValue={state.form.tagline}
             className='border'
             name='tagline'
             type='text'
-            value={tagline}
-            onChange={(e) => setTagline(e.target.value)}
           />
         </div>
         <div className='flex gap-2 h-10'>
-          <RegionSelect region={region} setRegion={setRegion} />
-          <StyledButton className='h-full' type='submit'>
-            Submit
+          <RegionSelect />
+          <StyledButton disabled={isPending} className='h-full' type='submit'>
+            {isPending ? 'Loading...' : 'Submit'}
           </StyledButton>
         </div>
+        {state.error && (
+          <p className='text-red-400 min-w-full w-0'>{state.error}</p>
+        )}
       </form>
     </Container>
   );

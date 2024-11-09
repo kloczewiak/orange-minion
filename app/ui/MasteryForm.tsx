@@ -1,7 +1,7 @@
 'use client';
 import { Container, StyledButton, StyledInput } from './components';
 import { RegionSelect } from './regionSelect';
-import { useActionState, useRef } from 'react';
+import { useActionState } from 'react';
 import { FormState, action } from './MasteryFormAction';
 
 export function MasteryForm() {
@@ -9,20 +9,10 @@ export function MasteryForm() {
     form: { gamename: '', tagline: '' },
   };
   const [state, formAction, isPending] = useActionState(action, initialState);
-  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <Container>
-      <form
-        className='flex flex-col items-end gap-2'
-        action={async (formData) => {
-          formAction(formData);
-          if (formRef.current) {
-            formRef.current.reset();
-          }
-        }}
-        ref={formRef}
-      >
+      <form className='flex flex-col items-end gap-2' action={formAction}>
         <div className='w-full flex items-center justify-between'>
           <label className='mr-3' htmlFor='gamename'>
             Game name

@@ -75,8 +75,8 @@ export async function getSummonerDetails(
     const { profileIconId, summonerLevel } = await getSummoner(puuid, region);
 
     return {
-      tagline,
-      gameName,
+      tagline: tag,
+      gameName: name,
       profileIconId,
       summonerLevel,
     };

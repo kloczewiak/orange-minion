@@ -15,17 +15,19 @@ import { getReadableRegion } from './typeFunctions';
 
 export async function getAccount(
   gameName: string,
-  tagLine: string,
+  tagline: string,
 ): Promise<AccountDto> {
   const response = await fetch(
-    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
+    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${gameName}/${tagline}`,
     { ...getFetchConfig(), ...{ cache: 'force-cache' } },
   );
 
   if (!response.ok) {
     console.error('getAccount failed with response:', await response.json());
     if (response.status === 404) {
-      throw new Error('Account not found.', { cause: response.status });
+      throw new Error(`Account ${gameName}#${tagline} not found.`, {
+        cause: response.status,
+      });
     }
     throw new Error('Failed to fetch account data.', {
       cause: response.status,
@@ -47,7 +49,7 @@ export async function getSummoner(
   );
 
   if (!response.ok) {
-    console.error('getAccount failed with response:', await response.json());
+    console.error('getSummoner failed with response:', await response.json());
     throw new Error('Failed to fetch summoner data.', {
       cause: response.status,
     });
@@ -59,17 +61,21 @@ export async function getSummoner(
 }
 
 export async function getSummonerDetails(
-  name: string,
-  tag: string,
+  gameName: string,
+  tagline: string,
   region: Region,
 ): Promise<SummonerDetails> {
-  const { puuid, tagLine, gameName } = await getAccount(name, tag);
+  const {
+    puuid,
+    tagLine: tag,
+    gameName: name,
+  } = await getAccount(gameName, tagline);
 
   try {
     const { profileIconId, summonerLevel } = await getSummoner(puuid, region);
 
     return {
-      tagLine,
+      tagline,
       gameName,
       profileIconId,
       summonerLevel,
@@ -78,7 +84,7 @@ export async function getSummonerDetails(
     const err = e as Error;
     console.log(region);
     throw new Error(
-      `Summoner was not found for this account in ${getReadableRegion(region) ?? region} server.`,
+      `Summoner was not found for ${tag}#${name} on ${getReadableRegion(region) ?? region} server.`,
       { cause: err.cause },
     );
   }
@@ -106,18 +112,22 @@ export async function getMastery(
 }
 
 export async function getMasteryForAccount(
-  name: string,
-  tag: string,
+  gameName: string,
+  tagline: string,
   region: Region,
 ): Promise<ChampionMasteryDto[]> {
-  const { puuid } = await getAccount(name, tag);
+  const {
+    puuid,
+    gameName: name,
+    tagLine: tag,
+  } = await getAccount(gameName, tagline);
   try {
     const mastery = await getMastery(puuid, region);
     return mastery;
   } catch (e) {
     const err = e as Error;
     throw new Error(
-      `Summoner was not found for this account in ${getReadableRegion(region) ?? region} server.`,
+      `Summoner was not found for ${name}#${tag} on ${getReadableRegion(region) ?? region} server.`,
       { cause: err.cause },
     );
   }
@@ -191,14 +201,18 @@ export async function getAllMatchIDsForAccount(
   tagline: string,
   region: Region,
 ) {
-  const { puuid } = await getAccount(gameName, tagline);
+  const {
+    puuid,
+    gameName: name,
+    tagLine: tag,
+  } = await getAccount(gameName, tagline);
   try {
     const matchIDs = await getAllMatchIDs(puuid, getCluster(region));
     return matchIDs;
   } catch (e) {
     const err = e as Error;
     throw new Error(
-      `Summoner was not found for this account in ${getReadableRegion(region) ?? region} server.`,
+      `Summoner was not found for ${name}#${tag} on ${getReadableRegion(region) ?? region} server.`,
       { cause: err.cause },
     );
   }

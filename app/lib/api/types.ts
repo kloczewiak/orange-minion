@@ -1,5 +1,5 @@
 export type SummonerDetails = {
-  tagLine: string;
+  tagline: string;
   gameName: string;
   profileIconId: number;
   summonerLevel: number;

@@ -25,7 +25,7 @@ export const SummonerProfileCard = async ({
       />
       <div className='flex flex-col text-left'>
         <p className='text-xl font-semibold'>{summoner.gameName}</p>
-        <p className='-mt-1 text-foreground-dimmed'>#{summoner.tagLine}</p>
+        <p className='-mt-1 text-foreground-dimmed'>#{summoner.tagline}</p>
         <p>Level {summoner.summonerLevel}</p>
       </div>
     </div>

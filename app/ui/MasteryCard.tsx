@@ -5,8 +5,8 @@ import {
   getChampionSummary,
   getChampionTileUrl,
 } from '../lib/api/helperFunctions';
-import { Suspense } from 'react';
 import { LocalDate } from './helperClient';
+import { shimmerStyles } from './components';
 
 export const MasteryList = async ({
   gameName,
@@ -25,12 +25,7 @@ export const MasteryList = async ({
   return (
     <div className='mx-auto mt-4 grid w-fit grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:px-4'>
       {masteries.map((mastery) => (
-        <Suspense
-          key={mastery.championId}
-          fallback={<p>{mastery.championId}</p>}
-        >
-          <MasteryCard key={mastery.championId} mastery={mastery} />
-        </Suspense>
+        <MasteryCard key={mastery.championId} mastery={mastery} />
       ))}
     </div>
   );
@@ -171,3 +166,33 @@ function MasteryProgress({
     </ul>
   );
 }
+
+export const MasteryCardSkeletonList = ({ count = 18 }: { count?: number }) => (
+  <div className='mx-auto mt-4 grid w-fit grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:px-4'>
+    {new Array(count).fill('').map((_, index) => (
+      <MasteryCardSkeleton key={index} />
+    ))}
+  </div>
+);
+
+const MasteryCardSkeleton = () => (
+  <div
+    className={`${shimmerStyles} basis-[455px] h-[240px] bg-slate-100 rounded-[40px] p-4 flex gap-4`}
+  >
+    <div
+      className={`${shimmerStyles} min-w-[150px] h-[150px] bg-slate-200 rounded-3xl`}
+    />
+    <div>
+      <div className={`${shimmerStyles} h-8 w-32 bg-slate-200 rounded-full`} />
+      <div
+        className={`${shimmerStyles} mt-2 h-6 w-36 bg-slate-200 rounded-full`}
+      />
+      <div
+        className={`${shimmerStyles} mt-2 h-14 w-28 bg-slate-200 rounded-2xl`}
+      />
+      <div
+        className={`${shimmerStyles} mt-2 h-14 w-56 bg-slate-200 rounded-2xl`}
+      />
+    </div>
+  </div>
+);

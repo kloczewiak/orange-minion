@@ -1,6 +1,6 @@
 import { RegionReadable } from '@/app/lib/api/riotTypes';
 import { getRegionCode } from '@/app/lib/api/typeFunctions';
-import { MasteryList } from '@/app/ui/MasteryCard';
+import { MasteryCardSkeletonList, MasteryList } from '@/app/ui/MasteryCard';
 import {
   SummonerProfileCard,
   SummonerProfileCardSkeleton,
@@ -28,7 +28,7 @@ export default async function Page(props: {
           />
         </Suspense>
       </div>
-      <Suspense fallback={<p>Loading masteries...</p>}>
+      <Suspense fallback={<MasteryCardSkeletonList />}>
         <MasteryList gameName={gameName} tagLine={tagLine} region={region} />
       </Suspense>
     </div>

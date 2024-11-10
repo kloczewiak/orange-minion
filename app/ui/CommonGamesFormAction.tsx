@@ -5,7 +5,7 @@ import { RegionReadable } from '../lib/api/riotTypes';
 import { getRegionCode } from '../lib/api/typeFunctions';
 
 export type FormState = {
-  error?: string;
+  errors?: string[];
   form: {
     gamename1: string;
     tagline1: string;
@@ -24,15 +24,22 @@ export const action = async (
   const tagline2 = formData.get('tagline2') as string;
   const region = formData.get('region') as RegionReadable;
 
-  try {
-    await Promise.all([
-      getSummonerDetails(gamename1, tagline1, getRegionCode(region)),
-      getSummonerDetails(gamename2, tagline2, getRegionCode(region)),
-    ]);
-  } catch (e) {
-    const err = e as Error;
+  const data = await Promise.allSettled([
+    getSummonerDetails(gamename1, tagline1, getRegionCode(region)),
+    getSummonerDetails(gamename2, tagline2, getRegionCode(region)),
+  ]);
+
+  const errors: string[] = [];
+  data.map((p) => {
+    if (p.status === 'rejected') {
+      const err = p.reason as Error;
+      errors.push(err.message);
+    }
+  });
+
+  if (errors.length > 0) {
     return {
-      error: err.message,
+      errors,
       form: {
         gamename1,
         tagline1,

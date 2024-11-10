@@ -36,7 +36,7 @@ export function MasteryForm() {
           />
         </div>
         <div className='flex gap-2 h-10'>
-          <RegionSelect />
+          <RegionSelect value={state.form.region} />
           <StyledButton disabled={isPending} className='h-full' type='submit'>
             {isPending ? 'Loading...' : 'Submit'}
           </StyledButton>

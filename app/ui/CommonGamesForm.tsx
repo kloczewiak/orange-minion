@@ -19,23 +19,45 @@ export function CommonGamesForm() {
   return (
     <Container className='w-full min-[384px]:w-auto'>
       <form className='flex flex-col gap-4' action={formAction}>
-        <SummonerInput number={1} />
-        <SummonerInput number={2} />
+        <SummonerInput
+          number={1}
+          defaultGameName={state.form.gamename1}
+          defaultTagline={state.form.tagline1}
+        />
+        <SummonerInput
+          number={2}
+          defaultGameName={state.form.gamename2}
+          defaultTagline={state.form.tagline2}
+        />
         <div className='flex justify-end gap-4'>
-          <RegionSelect />
+          <RegionSelect value={state.form.region} />
           <StyledButton disabled={isPending}>
             {isPending ? 'Loading...' : 'Submit'}
           </StyledButton>
         </div>
-        {state.error && (
-          <p className='text-red-400 w-0 min-w-full'>{state.error}</p>
+        {state.errors && (
+          <div>
+            {state.errors.map((error, index) => (
+              <p key={index} className='text-red-400 w-0 min-w-full'>
+                {error}
+              </p>
+            ))}
+          </div>
         )}
       </form>
     </Container>
   );
 }
 
-function SummonerInput({ number }: { number: number }) {
+function SummonerInput({
+  number,
+  defaultGameName,
+  defaultTagline,
+}: {
+  number: number;
+  defaultGameName?: string;
+  defaultTagline?: string;
+}) {
   return (
     <div className='bg-white rounded-lg p-4 flex flex-col gap-2'>
       <h3 className='text-lg font-medium'>{toOrdinal(number)} Summoner</h3>
@@ -44,6 +66,7 @@ function SummonerInput({ number }: { number: number }) {
           Game name
         </label>
         <StyledInput
+          defaultValue={defaultGameName}
           className='border'
           name={'gamename' + number}
           type='text'
@@ -55,6 +78,7 @@ function SummonerInput({ number }: { number: number }) {
           Tagline
         </label>
         <StyledInput
+          defaultValue={defaultTagline}
           className='border'
           name={'tagline' + number}
           type='text'

@@ -4,13 +4,22 @@ import { StyledSelect } from './components';
 import { RegionReadable } from '../lib/api/riotTypes';
 import { allRegions, getReadableRegion } from '../lib/api/typeFunctions';
 
-export function RegionSelect() {
+export function RegionSelect({ value }: { value?: RegionReadable }) {
   // BUG: There's a bug in React 19 that makes select components reset
   // after returning from `useActionState` even though they're controlled.
   // TODO: Update after the following issue is resolved:
   // https://github.com/facebook/react/issues/30580
 
   const [region, setRegion] = useState<RegionReadable>('EUNE');
+  const [_rerender, setRerender] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Workaround for the bug mentioned above
+    const timeout = setTimeout(() => {
+      setRerender((p) => !p);
+    }, 50);
+    return () => clearTimeout(timeout);
+  }, [value]);
 
   useEffect(() => {
     const regionLocalStorage = localStorage.getItem('region');

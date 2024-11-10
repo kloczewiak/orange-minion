@@ -3,7 +3,7 @@ import { ReactNode, useContext, useEffect, useState } from 'react';
 import { getMatchDetails } from '../lib/api/data';
 import { Cluster, Region } from '../lib/api/riotTypes';
 import { MatchDto, ParticipantDto } from '../lib/api/Match5VTypes';
-import { FullDate, LocalDate } from './helperClient';
+import { FullDate, LocalDate, shimmerStyles } from './helperClient';
 import { LookupContext } from './CommonGames';
 import { getReadableRegion } from '../lib/api/typeFunctions';
 import { RiotID } from '../lib/api/types';
@@ -238,9 +238,6 @@ function Item({ itemID }: { itemID: number }) {
     />
   );
 }
-
-const shimmerStyles =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent relative overflow-hidden';
 
 export function MatchSkeleton() {
   return (

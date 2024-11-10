@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getSummonerDetails } from '../lib/api/data';
 import { Region } from '../lib/api/riotTypes';
 import { getSummonerIconUrl } from '../lib/api/helperFunctions';
+import { shimmerStyles } from './helperClient';
 
 export const SummonerProfileCard = async ({
   gameName,
@@ -31,9 +32,6 @@ export const SummonerProfileCard = async ({
     </div>
   );
 };
-
-const shimmerStyles =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
 export const SummonerProfileCardSkeleton = () => (
   <div className={`flex items-center gap-4`}>

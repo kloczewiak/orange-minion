@@ -17,15 +17,17 @@ export async function getAccount(
   gameName: string,
   tagline: string,
 ): Promise<AccountDto> {
+  const tag = tagline.replace('#', '').trim();
+  const name = gameName.trim();
   const response = await fetch(
-    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(gameName)}/${encodeURIComponent(tagline)}`,
+    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(name)}/${encodeURIComponent(tag)}`,
     { ...getFetchConfig(), ...{ cache: 'force-cache' } },
   );
 
   if (!response.ok) {
     console.error('getAccount failed with response:', await response.json());
     if (response.status === 404) {
-      throw new Error(`Account ${gameName}#${tagline} not found.`, {
+      throw new Error(`Account ${name}#${tag} not found.`, {
         cause: response.status,
       });
     }

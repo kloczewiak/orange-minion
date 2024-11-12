@@ -16,7 +16,7 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);
-  const [gameName, tagLine] = params.account.split('-');
+  const [gameName, tagLine] = decodeURIComponent(params.account).split('-');
 
   try {
     const account = await getSummonerDetails(gameName, tagLine, region);
@@ -37,7 +37,7 @@ export default async function Page(props: Props) {
   // TODO: Add proper error handling instead of using error.tsx
   const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);
-  const [gameName, tagLine] = params.account.split('-');
+  const [gameName, tagLine] = decodeURIComponent(params.account).split('-');
 
   return (
     <div>

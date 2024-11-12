@@ -93,7 +93,7 @@ export function CommonGamesForm() {
             </StyledButton>
           </div>
           {state.success === false && (
-            <div>
+            <div className='flex flex-col gap-1'>
               {state.errors.map((error, index) => (
                 <p key={index} className='text-red-400 w-0 min-w-full'>
                   {error}
@@ -122,7 +122,7 @@ function SummonerInput({
       <h3 className='text-lg font-medium'>{toOrdinal(number)} Summoner</h3>
       <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between'>
         <label className='mr-3' htmlFor={'gamename' + number}>
-          Game name
+          Game&nbsp;name
         </label>
         <StyledInput
           defaultValue={defaultGameName}

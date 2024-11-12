@@ -39,17 +39,15 @@ export const MasteryCard = async ({
   const championSummary = await getChampionSummary(mastery.championId);
 
   return (
-    <div className='flex gap-4 rounded-[40px] bg-slate-100 p-4'>
-      <div>
+    <div className='flex gap-4 rounded-[40px] bg-slate-100 p-4 pr-1'>
+      <div className='flex-shrink-0'>
         <MasteryBanner
           championLevel={mastery.championLevel}
           championId={mastery.championId}
         />
       </div>
-      <div className='flex-grow'>
-        <h3 className='whitespace-nowrap text-3xl font-semibold'>
-          {championSummary.name}
-        </h3>
+      <div>
+        <h3 className='text-3xl font-semibold'>{championSummary.name}</h3>
         <p className='text-lg font-medium'>
           {mastery.championPoints.toLocaleString('en')} Points
         </p>

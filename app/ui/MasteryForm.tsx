@@ -102,18 +102,20 @@ function History() {
     history && (
       <Container>
         <p className='text-xl'>Search history</p>
-        <div className='flex flex-col gap-1 ml-2 mt-1'>
+        <ul className='flex flex-col gap-1 ml-4 mt-1 list-disc'>
           {history.map((id) => (
-            <p key={`${id.gameName}#${id.tagline}`}>
-              <Link
-                className='text-blue-400 hover:underline'
-                href={`/mastery/${id.region}/${id.gameName}/${id.tagline}`}
-              >
-                {id.gameName}#{id.tagline} on {id.region}
-              </Link>
-            </p>
+            <li key={`${id.gameName}#${id.tagline}`}>
+              <p>
+                <Link
+                  className='text-blue-400 hover:underline'
+                  href={`/mastery/${id.region}/${id.gameName}/${id.tagline}`}
+                >
+                  {id.gameName}#{id.tagline} on&nbsp;{id.region}
+                </Link>
+              </p>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     )
   );

@@ -18,7 +18,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);
   const playerIDs = (await props.searchParams).players.map((player) => {
-    const data = decodeURIComponent(player).split('-');
+    const data = player.split('-');
     return {
       gameName: data[0],
       tagline: data[1],
@@ -61,7 +61,7 @@ export default async function Page({ params, searchParams }: Props) {
   // TODO: Add proper error handling instead of using error.tsx
   const region = getRegionCode((await params).region as RegionReadable);
   const players = (await searchParams).players.map((player) => {
-    const data = decodeURIComponent(player).split('-');
+    const data = player.split('-');
     return {
       gameName: data[0],
       tagline: data[1],

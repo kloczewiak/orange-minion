@@ -58,6 +58,9 @@ export function MasteryForm() {
               defaultValue={state.form.gamename}
               className='border'
               name='gamename'
+              id='gamename'
+              autoComplete='off'
+              autoCorrect='off'
               type='text'
             />
           </div>
@@ -69,6 +72,9 @@ export function MasteryForm() {
               defaultValue={state.form.tagline}
               className='border'
               name='tagline'
+              id='tagline'
+              autoComplete='off'
+              autoCorrect='off'
               type='text'
             />
           </div>

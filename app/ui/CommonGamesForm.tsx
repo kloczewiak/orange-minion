@@ -120,7 +120,7 @@ function SummonerInput({
   return (
     <div className='bg-white rounded-lg p-4 flex flex-col gap-2'>
       <h3 className='text-lg font-medium'>{toOrdinal(number)} Summoner</h3>
-      <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between'>
+      <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between min-[384px]:items-center'>
         <label className='mr-3' htmlFor={'gamename' + number}>
           Game&nbsp;name
         </label>
@@ -128,11 +128,14 @@ function SummonerInput({
           defaultValue={defaultGameName}
           className='border'
           name={'gamename' + number}
+          id={'gamename' + number}
+          autoComplete='off'
+          autoCorrect='off'
           type='text'
           required
         />
       </div>
-      <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between'>
+      <div className='w-full flex flex-col min-[384px]:flex-row min-[384px]:justify-between min-[384px]:items-center'>
         <label className='mr-3' htmlFor={'tagline' + number}>
           Tagline
         </label>
@@ -140,6 +143,9 @@ function SummonerInput({
           defaultValue={defaultTagline}
           className='border'
           name={'tagline' + number}
+          id={'tagline' + number}
+          autoComplete='off'
+          autoCorrect='off'
           type='text'
           required
         />

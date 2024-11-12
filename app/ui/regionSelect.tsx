@@ -36,6 +36,9 @@ export function RegionSelect({ value }: { value?: RegionReadable }) {
   return (
     <StyledSelect
       name='region'
+      id='region'
+      autoComplete='off'
+      autoCorrect='off'
       value={region}
       onChange={(e) => handleChange(e.target.value)}
     >

@@ -1,3 +1,5 @@
+import { RegionReadable } from './riotTypes';
+
 export type SummonerDetails = {
   tagline: string;
   gameName: string;
@@ -8,4 +10,8 @@ export type SummonerDetails = {
 export type RiotID = {
   tagline: string;
   gameName: string;
+};
+
+export type SearchHistoryItem = RiotID & {
+  region: RegionReadable;
 };

@@ -1,17 +1,37 @@
 'use server';
-import { redirect } from 'next/navigation';
 import { getSummonerDetails } from '../lib/api/data';
 import { RegionReadable } from '../lib/api/riotTypes';
 import { getRegionCode } from '../lib/api/typeFunctions';
 
-export type FormState = {
-  error?: string;
-  form: {
-    gamename: string;
-    tagline: string;
-    region?: RegionReadable;
-  };
-};
+export type FormState =
+  // Success state
+  | {
+      success: true;
+      form: {
+        gamename: string;
+        tagline: string;
+        region: RegionReadable;
+      };
+    }
+  // Error state
+  | {
+      success: false;
+      error: string;
+      form: {
+        gamename: string;
+        tagline: string;
+        region: RegionReadable;
+      };
+    }
+  // Initial state
+  | {
+      success: null;
+      form: {
+        gamename: string;
+        tagline: string;
+        region?: RegionReadable;
+      };
+    };
 export const action = async (
   _prevState: FormState,
   formData: FormData,
@@ -21,10 +41,23 @@ export const action = async (
   const region = formData.get('region') as RegionReadable;
 
   try {
-    await getSummonerDetails(gamename, tagline, getRegionCode(region));
+    const summoner = await getSummonerDetails(
+      gamename,
+      tagline,
+      getRegionCode(region),
+    );
+    return {
+      success: true,
+      form: {
+        gamename: summoner.gameName,
+        tagline: summoner.tagline,
+        region,
+      },
+    };
   } catch (e) {
     const err = e as Error;
     return {
+      success: false,
       error: err.message,
       form: {
         gamename,
@@ -33,6 +66,4 @@ export const action = async (
       },
     };
   }
-
-  redirect(`/mastery/${region}/${gamename}/${tagline}`);
 };

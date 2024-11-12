@@ -15,3 +15,9 @@ export type RiotID = {
 export type SearchHistoryItem = RiotID & {
   region: RegionReadable;
 };
+
+export type DualSearchHistoryItem = {
+  account1: SearchHistoryItem;
+  account2: SearchHistoryItem;
+  region: RegionReadable;
+};

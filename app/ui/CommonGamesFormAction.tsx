@@ -3,17 +3,44 @@ import { redirect } from 'next/navigation';
 import { getSummonerDetails } from '../lib/api/data';
 import { RegionReadable } from '../lib/api/riotTypes';
 import { getRegionCode } from '../lib/api/typeFunctions';
+import { RiotID } from '../lib/api/types';
 
-export type FormState = {
-  errors?: string[];
-  form: {
-    gamename1: string;
-    tagline1: string;
-    gamename2: string;
-    tagline2: string;
-    region?: RegionReadable;
-  };
-};
+export type FormState =
+  // Success state
+  | {
+      success: true;
+      form: {
+        gamename1: string;
+        tagline1: string;
+        gamename2: string;
+        tagline2: string;
+        region: RegionReadable;
+      };
+    }
+  // Error state
+  | {
+      success: false;
+      errors: string[];
+      form: {
+        gamename1: string;
+        tagline1: string;
+        gamename2: string;
+        tagline2: string;
+        region: RegionReadable;
+      };
+    }
+  // Initial state
+  | {
+      success: null;
+      form: {
+        gamename1: string;
+        tagline1: string;
+        gamename2: string;
+        tagline2: string;
+        region?: RegionReadable;
+      };
+    };
+
 export const action = async (
   _prevState: FormState,
   formData: FormData,
@@ -30,29 +57,44 @@ export const action = async (
   ]);
 
   const errors: string[] = [];
-  data.map((p) => {
+  const accounts: RiotID[] = [];
+  data.forEach((p, index) => {
     if (p.status === 'rejected') {
       const err = p.reason as Error;
       errors.push(err.message);
+    } else {
+      accounts[index] = {
+        gameName: p.value.gameName,
+        tagline: p.value.tagline,
+      };
     }
   });
 
+  console.log('accounts: ');
+  console.log(accounts);
+
   if (errors.length > 0) {
     return {
+      success: false,
       errors,
       form: {
-        gamename1,
-        tagline1,
-        gamename2,
-        tagline2,
+        gamename1: accounts[0]?.gameName || gamename1,
+        tagline1: accounts[0]?.tagline || tagline1,
+        gamename2: accounts[1]?.gameName || gamename2,
+        tagline2: accounts[1]?.tagline || tagline2,
         region,
       },
     };
   }
 
-  const searchParams = new URLSearchParams();
-  searchParams.append('players', `${gamename1}#${tagline1}`);
-  searchParams.append('players', `${gamename2}#${tagline2}`);
-
-  redirect(`/commongames/${region}?${searchParams}`);
+  return {
+    success: true,
+    form: {
+      gamename1,
+      tagline1,
+      gamename2,
+      tagline2,
+      region,
+    },
+  };
 };

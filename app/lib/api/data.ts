@@ -18,7 +18,7 @@ export async function getAccount(
   tagline: string,
 ): Promise<AccountDto> {
   const response = await fetch(
-    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${gameName}/${tagline}`,
+    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(gameName)}/${encodeURIComponent(tagline)}`,
     { ...getFetchConfig(), ...{ cache: 'force-cache' } },
   );
 

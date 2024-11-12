@@ -70,9 +70,6 @@ export const action = async (
     }
   });
 
-  console.log('accounts: ');
-  console.log(accounts);
-
   if (errors.length > 0) {
     return {
       success: false,

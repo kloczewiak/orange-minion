@@ -84,7 +84,6 @@ export async function getSummonerDetails(
     };
   } catch (e) {
     const err = e as Error;
-    console.log(region);
     throw new Error(
       `Summoner was not found for ${name}#${tag} on ${getReadableRegion(region) ?? region} server.`,
       { cause: err.cause },

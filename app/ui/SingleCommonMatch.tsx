@@ -53,7 +53,6 @@ function Match({
   details: MatchDto;
   playerPUUIDs: string[];
 }) {
-  console.log(details);
   const { queues } = useContext(LookupContext);
 
   const queueLookup = queues?.find((queue) => queue.id == details.info.queueId);

@@ -90,10 +90,10 @@ export const action = async (
   return {
     success: true,
     form: {
-      gamename1,
-      tagline1,
-      gamename2,
-      tagline2,
+      gamename1: accounts[0].gameName,
+      tagline1: accounts[0].tagline,
+      gamename2: accounts[1].gameName,
+      tagline2: accounts[1].tagline,
       region,
     },
   };

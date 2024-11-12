@@ -2,19 +2,19 @@
 
 Orange Minion is an open-source website offering a collection of tools for [League of Legends](https://www.leagueoflegends.com).
 
-Built with [Next.js](https://nextjs.org), this project provides easy-to-use tools to display champion mastery, track common games with friends, and more in the future.
+Built with [Next.js](https://nextjs.org), this project provides easy-to-use tools to display champion mastery, track match history with friends, and more in the future.
 
 ## Features
 
-### Mastery Viewer
+### Mastery Showcase
 Easily view and showcase your champion masteries in a visually appealing layout.
 
-![Mastery viewer page](./readmeAssets/masteryPage.png)
+![Mastery showcase page](./readmeAssets/masteryPage.png)
 
-### Common Games Viewer
+### Shared Match History
 Quickly view all games you have played with another player, allowing you to analyze your shared history and collaboration.
 
-![Common games viewer page](./readmeAssets/commonGamesPage.png)
+![Shared match history page](./readmeAssets/commonGamesPage.png)
 
 ## Contributing
 

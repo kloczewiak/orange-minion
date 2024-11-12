@@ -104,7 +104,7 @@ function History() {
         <p className='text-xl'>Search history</p>
         <ul className='flex flex-col gap-1 ml-4 mt-1 list-disc'>
           {history.map((id) => (
-            <li key={`${id.gameName}#${id.tagline}`}>
+            <li key={`${id.gameName}#${id.tagline}on${id.region}`}>
               <p>
                 <Link
                   className='text-blue-400 hover:underline'

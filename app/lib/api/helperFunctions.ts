@@ -29,6 +29,7 @@ export const getChampionSummaryTable = async (): Promise<
 > => {
   const response = await fetch(
     'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json',
+    { next: { revalidate: 60 * 60 * 24 } },
   );
 
   if (!response.ok) throw new Error('Failed to fetch summoner lookup table.');
@@ -54,6 +55,7 @@ export const getChampionSkinTable = async (
 ): Promise<ChampionSkinTable> => {
   const response = await fetch(
     `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/${championId}.json`,
+    { next: { revalidate: 60 * 60 * 24 } },
   );
 
   if (!response.ok)
@@ -107,6 +109,7 @@ export const getCluster = (region: Region): Cluster => {
 export async function getItemsLookupTable(): Promise<Item[]> {
   const response = await fetch(
     'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json',
+    { next: { revalidate: 60 * 60 * 24 } },
   );
 
   if (!response.ok) {
@@ -119,6 +122,7 @@ export async function getItemsLookupTable(): Promise<Item[]> {
 export async function getQueuesLookupTable(): Promise<Queue[]> {
   const response = await fetch(
     'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/queues.json',
+    { next: { revalidate: 60 * 60 * 24 } },
   );
 
   if (!response.ok) {
@@ -131,6 +135,7 @@ export async function getQueuesLookupTable(): Promise<Queue[]> {
 export async function getChampionsLookupTable(): Promise<Champion[]> {
   const response = await fetch(
     'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json',
+    { next: { revalidate: 60 * 60 * 24 } },
   );
 
   if (!response.ok) {

@@ -1,4 +1,11 @@
+import { Metadata } from 'next';
 import { MasteryForm } from '../ui/MasteryForm';
+
+export const metadata: Metadata = {
+  title: 'Mastery Showcase',
+  description:
+    'Easily view and showcase your champion masteries in a visually appealing layout.',
+};
 
 export default function Page() {
   return (

@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+export const metadata = {
+  title: {
+    absolute: 'Orange Minion',
+  },
+};
+
 export default function Home() {
   return (
     <div className='flex flex-col items-center py-8 gap-8'>

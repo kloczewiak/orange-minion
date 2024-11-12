@@ -1,3 +1,4 @@
+import { getSummonerDetails } from '@/app/lib/api/data';
 import { RegionReadable } from '@/app/lib/api/riotTypes';
 import { getRegionCode } from '@/app/lib/api/typeFunctions';
 import { MasteryCardSkeletonList, MasteryList } from '@/app/ui/MasteryCard';
@@ -5,11 +6,34 @@ import {
   SummonerProfileCard,
   SummonerProfileCardSkeleton,
 } from '@/app/ui/summonerProfileCard';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-export default async function Page(props: {
+type Props = {
   params: Promise<{ region: string; account: string }>;
-}) {
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const region = getRegionCode(params.region as RegionReadable);
+  const [gameName, tagLine] = params.account.split('-');
+
+  try {
+    const account = await getSummonerDetails(gameName, tagLine, region);
+
+    return {
+      title: `${account.gameName}'s Mastery Showcase`,
+      description: `View ${account.gameName}#${account.tagline}'s champion masteries.`,
+    };
+  } catch (error) {
+    return {
+      title: `${gameName}'s Mastery Showcase`,
+      description: `View ${gameName}#${tagLine}'s champion masteries.`,
+    };
+  }
+}
+
+export default async function Page(props: Props) {
   // TODO: Add proper error handling instead of using error.tsx
   const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);

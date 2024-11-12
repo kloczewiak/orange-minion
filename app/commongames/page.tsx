@@ -1,4 +1,11 @@
+import { Metadata } from 'next';
 import { CommonGamesForm } from '../ui/CommonGamesForm';
+
+export const metadata: Metadata = {
+  title: 'Shared Match History',
+  description:
+    'Quickly view all games you have played with another player, allowing you to analyze your shared history and collaboration.',
+};
 
 export default function Page() {
   return (

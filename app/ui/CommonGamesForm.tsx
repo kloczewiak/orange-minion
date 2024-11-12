@@ -65,8 +65,8 @@ export function CommonGamesForm() {
       localStorage.setItem('dualAccountSearchHistory', JSON.stringify(data));
 
       const searchParams = new URLSearchParams();
-      searchParams.append('players', `${gamename1}#${tagline1}`);
-      searchParams.append('players', `${gamename2}#${tagline2}`);
+      searchParams.append('players', `${gamename1}-${tagline1}`);
+      searchParams.append('players', `${gamename2}-${tagline2}`);
 
       router.push('/commongames/' + region + '?' + searchParams);
     }
@@ -180,11 +180,11 @@ function HistoryItem({ item }: { item: DualSearchHistoryItem }) {
   const searchParams = new URLSearchParams();
   searchParams.append(
     'players',
-    `${item.account1.gameName}#${item.account1.tagline}`,
+    `${item.account1.gameName}-${item.account1.tagline}`,
   );
   searchParams.append(
     'players',
-    `${item.account2.gameName}#${item.account2.tagline}`,
+    `${item.account2.gameName}-${item.account2.tagline}`,
   );
 
   return (

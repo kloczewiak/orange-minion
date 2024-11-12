@@ -18,7 +18,7 @@ export default async function Page({
   // TODO: Add proper error handling instead of using error.tsx
   const region = getRegionCode((await params).region as RegionReadable);
   const players = (await searchParams).players.map((player) => {
-    const data = player.split('#');
+    const data = player.split('-');
     return {
       gameName: data[0],
       tagline: data[1],

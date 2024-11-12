@@ -8,13 +8,12 @@ import {
 import { Suspense } from 'react';
 
 export default async function Page(props: {
-  params: Promise<{ region: string; gameName: string; tagLine: string }>;
+  params: Promise<{ region: string; account: string }>;
 }) {
   // TODO: Add proper error handling instead of using error.tsx
   const params = await props.params;
   const region = getRegionCode(params.region as RegionReadable);
-  const gameName = params.gameName;
-  const tagLine = params.tagLine;
+  const [gameName, tagLine] = params.account.split('-');
 
   return (
     <div>

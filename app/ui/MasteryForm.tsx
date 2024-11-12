@@ -42,7 +42,7 @@ export function MasteryForm() {
       });
       data = data.splice(0, 5);
       localStorage.setItem('accountSearchHistory', JSON.stringify(data));
-      router.push(`/mastery/${region}/${gamename}/${tagline}`);
+      router.push(`/mastery/${region}/${gamename}-${tagline}`);
     }
   }, [state.success]);
 
@@ -108,7 +108,7 @@ function History() {
               <p>
                 <Link
                   className='text-blue-400 hover:underline'
-                  href={`/mastery/${id.region}/${id.gameName}/${id.tagline}`}
+                  href={`/mastery/${id.region}/${id.gameName}-${id.tagline}`}
                 >
                   {id.gameName}#{id.tagline} on&nbsp;{id.region}
                 </Link>

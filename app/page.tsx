@@ -49,7 +49,7 @@ const Feature = ({
     href={href}
   >
     <div>
-      <h2 className='text-2xl group-hover:underline text-accent decoration-primary'>
+      <h2 className='text-2xl underline text-accent decoration-transparent group-hover:decoration-primary transition-colors'>
         {title}
       </h2>
       <p className='mt-2'>{children}</p>

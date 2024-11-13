@@ -70,7 +70,7 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <div className='py-6'>
-      <div className='flex flex-col items-center sm:flex-row gap-4 justify-center'>
+      <div className='flex flex-col items-start w-fit mx-auto sm:flex-row gap-4'>
         {players.map(({ gameName, tagline }) => (
           <Suspense
             key={`${gameName}#${tagline}`}

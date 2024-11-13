@@ -65,9 +65,9 @@ function Match({
   );
 
   return (
-    <div className='bg-slate-100 rounded-[2rem] p-4'>
+    <div className='bg-primary/5 rounded-[2rem] p-4'>
       <div className='flex flex-col sm:flex-row justify-between items-start'>
-        <p className='text-2xl font-semibold'>
+        <p className='text-2xl font-semibold text-primary'>
           {(queueLookup &&
             (queueLookup.detailedDescription || queueLookup.name)) ||
             `Unknown queue - ${details.info.queueId}`}
@@ -114,22 +114,22 @@ function Player({ data }: { data: ParticipantDto }) {
       : `${toOrdinal(data.subteamPlacement)} Place`;
   return (
     <div
-      className={`rounded-2xl p-2 ${data.win ? 'bg-green-100' : 'bg-red-100'} flex flex-col`}
+      className={`rounded-2xl p-2 ${data.win ? 'bg-green-950' : 'bg-red-950'} flex flex-col`}
     >
       <div className='flex justify-between'>
         {data.riotIdGameName ? (
           <p>
             {data.riotIdGameName}
-            <span className='text-black/30 ml-1'>#{data.riotIdTagline}</span>
+            <span className='text-primary/70 ml-1'>#{data.riotIdTagline}</span>
           </p>
         ) : (
           <p>{data.summonerName}</p>
         )}
-        <p className={`${data.win ? 'text-green-600' : 'text-red-600'}`}>
+        <p className={`${data.win ? 'text-green-300' : 'text-red-300'}`}>
           {winText}
         </p>
       </div>
-      <div className='flex justify-between items-end flex-1'>
+      <div className='flex justify-between items-end flex-1 mt-1'>
         <Champion championId={data.championId}>
           <p>
             <span className='text-green-500'>{data.kills}</span> /{' '}
@@ -243,22 +243,22 @@ export function MatchSkeleton() {
   return (
     <div
       className={
-        shimmerStyles + ' w-full h-[194px] bg-slate-100 rounded-[2rem] p-4'
+        shimmerStyles + ' w-full h-[198px] bg-primary/5 rounded-[2rem] p-4'
       }
     >
-      <div className={shimmerStyles + ' rounded-full h-7 w-64 bg-slate-200'}>
+      <div className={shimmerStyles + ' rounded-full h-7 w-64 bg-primary/5'}>
         &nbsp;
       </div>
       <div
-        className={shimmerStyles + ' rounded-full h-5 w-56 bg-slate-200 mt-1'}
+        className={shimmerStyles + ' rounded-full h-5 w-56 bg-primary/5 mt-1'}
       >
         &nbsp;
       </div>
       <div className='w-full grid grid-cols-2 mt-2 gap-4'>
-        <div className={shimmerStyles + ' h-[102px] rounded-2xl bg-slate-200'}>
+        <div className={shimmerStyles + ' h-[102px] rounded-2xl bg-primary/5'}>
           &nbsp;
         </div>
-        <div className={shimmerStyles + ' h-[102px] rounded-2xl bg-slate-200'}>
+        <div className={shimmerStyles + ' h-[102px] rounded-2xl bg-primary/5'}>
           &nbsp;
         </div>
       </div>

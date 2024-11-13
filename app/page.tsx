@@ -10,7 +10,7 @@ export const metadata = {
 export default function Home() {
   return (
     <div className='flex flex-col items-center py-8 gap-8'>
-      <h1 className='text-4xl sm:text-5xl font-medium text-orange-400'>
+      <h1 className='text-4xl sm:text-5xl font-medium text-primary'>
         Orange Minion
       </h1>
       <Feature
@@ -45,11 +45,13 @@ const Feature = ({
   href: string;
 }) => (
   <Link
-    className='bg-slate-100 rounded-[2.5rem] max-w-screen-sm p-4 group flex flex-col items-center gap-4 md:flex-row md:items-start'
+    className='bg-primary/5 rounded-[2.5rem] max-w-screen-sm p-4 group flex flex-col items-center gap-4 md:flex-row md:items-start'
     href={href}
   >
     <div>
-      <h2 className='text-2xl group-hover:underline'>{title}</h2>
+      <h2 className='text-2xl group-hover:underline text-accent decoration-primary'>
+        {title}
+      </h2>
       <p className='mt-2'>{children}</p>
     </div>
     <Image

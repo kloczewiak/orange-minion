@@ -56,7 +56,6 @@ export function MasteryForm() {
             </label>
             <StyledInput
               defaultValue={state.form.gamename}
-              className='border'
               name='gamename'
               id='gamename'
               autoComplete='off'
@@ -70,7 +69,6 @@ export function MasteryForm() {
             </label>
             <StyledInput
               defaultValue={state.form.tagline}
-              className='border'
               name='tagline'
               id='tagline'
               autoComplete='off'

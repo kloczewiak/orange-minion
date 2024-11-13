@@ -7,6 +7,7 @@ import {
 } from '../lib/api/helperFunctions';
 import { LocalDate } from './helperClient';
 import { shimmerStyles } from './components';
+import { XMarkIcon, CheckIcon } from '@heroicons/react/16/solid';
 
 export const MasteryList = async ({
   gameName,
@@ -39,7 +40,7 @@ export const MasteryCard = async ({
   const championSummary = await getChampionSummary(mastery.championId);
 
   return (
-    <div className='flex gap-4 rounded-[40px] bg-slate-100 p-4 pr-1'>
+    <div className='flex gap-4 rounded-[40px] bg-primary/5 p-4 pr-1'>
       <div className='flex-shrink-0'>
         <MasteryBanner
           championLevel={mastery.championLevel}
@@ -47,8 +48,10 @@ export const MasteryCard = async ({
         />
       </div>
       <div>
-        <h3 className='text-3xl font-semibold'>{championSummary.name}</h3>
-        <p className='text-lg font-medium'>
+        <h3 className='text-3xl font-semibold text-primary'>
+          {championSummary.name}
+        </h3>
+        <p className='text-lg font-medium text-accent'>
           {mastery.championPoints.toLocaleString('en')} Points
         </p>
         <div className='flex flex-col gap-2'>
@@ -131,34 +134,28 @@ function MasteryProgress({
   championPts: number;
   ptsUntilNextLvl: number;
 }) {
-  const checkmarkUrl =
-    'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-postgame/global/default/miniseries-progress-w.png';
-  const xmarkUrl =
-    'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-postgame/global/default/miniseries-progress-l.png';
-  const Check = ({ value }: { value: boolean }) => (
-    <Image
-      src={value ? xmarkUrl : checkmarkUrl}
-      alt={value ? 'Not completed' : 'Completed'}
-      width={24}
-      height={24}
-    />
-  );
+  const Check = ({ value }: { value: boolean }) =>
+    value ? (
+      <CheckIcon className='size-6 text-accent' />
+    ) : (
+      <XMarkIcon className='size-6 text-accent' />
+    );
 
   const nextLevelPts = championPts + ptsUntilNextLvl;
 
   return (
     <ul className='ml-1'>
       {totalMarks > 0 && (
-        <li className='flex items-center'>
-          <Check value={earnedMarks < totalMarks} />
+        <li className='flex items-start'>
+          <Check value={earnedMarks >= totalMarks} />
           <p>
             Earned {earnedMarks} out of {totalMarks} Mark
             {totalMarks == 1 ? '' : 's'}
           </p>
         </li>
       )}
-      <li className='flex items-center'>
-        <Check value={ptsUntilNextLvl >= 0} />
+      <li className='flex items-start'>
+        <Check value={ptsUntilNextLvl < 0} />
         <p>Reached {nextLevelPts.toLocaleString('en')}&nbsp;Points</p>
       </li>
     </ul>
@@ -175,21 +172,21 @@ export const MasteryCardSkeletonList = ({ count = 18 }: { count?: number }) => (
 
 const MasteryCardSkeleton = () => (
   <div
-    className={`${shimmerStyles} basis-[455px] h-[240px] bg-slate-100 rounded-[40px] p-4 flex gap-4`}
+    className={`${shimmerStyles} shrink max-w-full w-[442px] h-[240px] bg-primary/5 rounded-[40px] p-4 flex gap-4`}
   >
     <div
-      className={`${shimmerStyles} min-w-[150px] h-[150px] bg-slate-200 rounded-3xl`}
+      className={`${shimmerStyles} min-w-[150px] h-[150px] bg-primary/5 rounded-3xl`}
     />
-    <div>
-      <div className={`${shimmerStyles} h-8 w-32 bg-slate-200 rounded-full`} />
+    <div className='block'>
+      <div className={`${shimmerStyles} h-8 w-32 bg-primary/5 rounded-full`} />
       <div
-        className={`${shimmerStyles} mt-2 h-6 w-36 bg-slate-200 rounded-full`}
+        className={`${shimmerStyles} mt-2 h-6 w-36 bg-primary/5 rounded-full`}
       />
       <div
-        className={`${shimmerStyles} mt-2 h-14 w-28 bg-slate-200 rounded-2xl`}
+        className={`${shimmerStyles} mt-2 h-14 w-28 bg-primary/5 rounded-2xl`}
       />
       <div
-        className={`${shimmerStyles} mt-2 h-14 w-56 bg-slate-200 rounded-2xl`}
+        className={`${shimmerStyles} mt-2 h-14 w-56 bg-primary/5 rounded-2xl`}
       />
     </div>
   </div>

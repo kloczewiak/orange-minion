@@ -55,7 +55,7 @@ const Feature = ({
       <p className='mt-2'>{children}</p>
     </div>
     <Image
-      className='float-right bg-white p-2 rounded-3xl'
+      className='float-right bg-background p-2 rounded-3xl'
       src={imageSrc}
       alt={`Screenshot of ${title}`}
       width={384}

@@ -109,16 +109,37 @@ function Match({
 }
 
 function Player({ data }: { data: ParticipantDto }) {
-  const winText =
-    !data.subteamPlacement || data.subteamPlacement == 0
-      ? data.win
-        ? 'Victory'
-        : 'Defeat'
-      : `${toOrdinal(data.subteamPlacement)} Place`;
+  let winText;
+  let winStatus: 'GOOD' | 'BAD' | 'NEUTRAL';
+
+  // if it's a remake
+  if (data.gameEndedInEarlySurrender) {
+    winText = 'Remake';
+    winStatus = 'NEUTRAL';
+    // if it's a free for all game
+  } else if (data.subteamPlacement) {
+    winText = `${toOrdinal(data.subteamPlacement)} Place`;
+    winStatus = data.win ? 'GOOD' : 'BAD';
+    // normal game
+  } else {
+    winText = data.win ? 'Victory' : 'Defeat';
+    winStatus = data.win ? 'GOOD' : 'BAD';
+  }
+
+  const bgColorMap: Record<typeof winStatus, string> = {
+    GOOD: 'bg-green-950',
+    BAD: 'bg-red-950',
+    NEUTRAL: 'bg-primary/10',
+  };
+
+  const textColorMap: Record<typeof winStatus, string> = {
+    GOOD: 'text-green-300',
+    BAD: 'text-red-300',
+    NEUTRAL: 'text-text',
+  };
+
   return (
-    <div
-      className={`rounded-2xl p-2 ${data.win ? 'bg-green-950' : 'bg-red-950'} flex flex-col`}
-    >
+    <div className={`rounded-2xl p-2 ${bgColorMap[winStatus]} flex flex-col`}>
       <div className='flex justify-between'>
         {data.riotIdGameName ? (
           <p>
@@ -128,9 +149,7 @@ function Player({ data }: { data: ParticipantDto }) {
         ) : (
           <p>{data.summonerName}</p>
         )}
-        <p className={`${data.win ? 'text-green-300' : 'text-red-300'}`}>
-          {winText}
-        </p>
+        <p className={`${textColorMap[winStatus]}`}>{winText}</p>
       </div>
       <div className='flex justify-between items-end flex-1 mt-1'>
         <Champion championId={data.championId}>

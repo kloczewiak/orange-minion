@@ -8,7 +8,10 @@ import { LookupContext } from './CommonGames';
 import { getReadableRegion } from '../lib/api/typeFunctions';
 import { RiotID } from '../lib/api/types';
 import Image from 'next/image';
-import { getChampionTileUrl } from '../lib/api/helperFunctions';
+import {
+  getAdjustedImageUrl,
+  getChampionTileUrl,
+} from '../lib/api/helperFunctions';
 import { toOrdinal } from 'number-to-words';
 import { shimmerStyles } from './components';
 
@@ -216,16 +219,12 @@ function Item({ itemID }: { itemID: number }) {
 
   const { items } = useContext(LookupContext);
   const itemLookup = items?.find((item) => item.id == itemID);
-  const itemPathSplit = itemLookup?.iconPath.split('/');
-  const itemPath =
-    `https://raw.communitydragon.org/latest/plugins/rcp-be-${itemPathSplit?.[1]}/global/default/` +
-    itemPathSplit?.slice(3).join('/').toLowerCase();
 
   return itemLookup ? (
     <Image
       className='rounded-lg'
       alt={itemLookup.name}
-      src={itemPath}
+      src={getAdjustedImageUrl(itemLookup.iconPath)}
       width={30}
       height={30}
     />

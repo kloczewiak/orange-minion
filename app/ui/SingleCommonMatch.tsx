@@ -228,13 +228,7 @@ function Item({ itemID }: { itemID: number }) {
       height={30}
     />
   ) : (
-    <Image
-      className='rounded-lg'
-      alt='Unknown Item'
-      src='https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/items/icons2d/gp_ui_placeholder.png'
-      width={30}
-      height={30}
-    />
+    <div className='bg-gray-800 rounded-lg w-[30px] h-[30px]'>&nbsp;</div>
   );
 }
 

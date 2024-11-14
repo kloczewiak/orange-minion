@@ -2,16 +2,16 @@
 import { createContext, useEffect, useState } from 'react';
 import { getCommonMatchIDs, getPlayerPUUID } from '../lib/api/data';
 import { Champion, Item, Queue, Region } from '../lib/api/riot/riotTypes';
-import { RiotID } from '../lib/types';
-import { CommonMatch, MatchSkeleton } from './SingleCommonMatch';
 import {
   getChampionsLookupTable,
-  getSwarmChampionLookupTable,
   getCluster,
   getItemsLookupTable,
   getQueuesLookupTable,
+  getSwarmChampionLookupTable,
 } from '../lib/helperFunctions';
+import { RiotID } from '../lib/types';
 import { StyledButton } from './components';
+import { CommonMatch, MatchSkeleton } from './SingleCommonMatch';
 
 type LookupContextType = {
   items?: Item[];

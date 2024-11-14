@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { StyledSelect } from './components';
-import { RegionReadable } from '../lib/types';
-import { getReadableRegion } from '../lib/helperFunctions';
 import { allRegions } from '../lib/constants';
+import { getReadableRegion } from '../lib/helperFunctions';
+import { RegionReadable } from '../lib/types';
+import { StyledSelect } from './components';
 
 export function RegionSelect({ value }: { value?: RegionReadable }) {
   // BUG: There's a bug in React 19 that makes select components reset

@@ -1,17 +1,21 @@
 'use server';
 
-import { getApiUrl, getCluster, getFetchConfig } from '../helperFunctions';
+import {
+  getApiUrl,
+  getCluster,
+  getFetchConfig,
+  getReadableRegion,
+} from '../helperFunctions';
+import { RiotID, SummonerDetails } from '../types';
+import { MatchDto } from './riot/Match5VTypes';
 import {
   AccountDto,
   ChampionInfo,
   ChampionMasteryDto,
-  Region,
   Cluster,
+  Region,
   SummonerDTO,
 } from './riot/riotTypes';
-import { MatchDto } from './riot/Match5VTypes';
-import { RiotID, SummonerDetails } from '../types';
-import { getReadableRegion } from '../helperFunctions';
 
 export async function getAccount(
   gameName: string,

@@ -1,6 +1,6 @@
 import { getSummonerDetails } from '@/app/lib/api/data';
-import { RegionReadable } from '@/app/lib/types';
 import { getRegionCode } from '@/app/lib/helperFunctions';
+import { RegionReadable } from '@/app/lib/types';
 import { MasteryCardSkeletonList, MasteryList } from '@/app/ui/MasteryCard';
 import {
   SummonerProfileCard,

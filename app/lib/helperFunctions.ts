@@ -1,4 +1,3 @@
-import { regionCodeMap, regionMap } from './constants';
 import {
   Champion,
   ChampionSkinTable,
@@ -8,6 +7,7 @@ import {
   Queue,
   Region,
 } from './api/riot/riotTypes';
+import { regionCodeMap, regionMap } from './constants';
 import { RegionReadable } from './types';
 
 export const getApiUrl = (region: Cluster | Region) =>

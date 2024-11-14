@@ -1,12 +1,12 @@
 'use client';
-import { useActionState, useEffect, useState } from 'react';
-import { Container, StyledButton, StyledInput } from './components';
-import { toOrdinal } from 'number-to-words';
-import { RegionSelect } from './regionSelect';
-import { FormState, action } from './CommonGamesFormAction';
 import Link from 'next/link';
-import { DualSearchHistoryItem } from '../lib/types';
 import { useRouter } from 'next/navigation';
+import { toOrdinal } from 'number-to-words';
+import { useActionState, useEffect, useState } from 'react';
+import { DualSearchHistoryItem } from '../lib/types';
+import { FormState, action } from './CommonGamesFormAction';
+import { Container, StyledButton, StyledInput } from './components';
+import { RegionSelect } from './regionSelect';
 
 export function CommonGamesForm() {
   const initialState: FormState = {

@@ -1,10 +1,10 @@
+import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import Image from 'next/image';
 import { getMasteryForAccount } from '../lib/api/data';
 import { ChampionMasteryDto, Region } from '../lib/api/riot/riotTypes';
 import { getChampionSummary, getChampionTileUrl } from '../lib/helperFunctions';
-import { LocalDate } from './helperClient';
 import { shimmerStyles } from './components';
-import { XMarkIcon, CheckIcon } from '@heroicons/react/16/solid';
+import { LocalDate } from './helperClient';
 
 export const MasteryList = async ({
   gameName,

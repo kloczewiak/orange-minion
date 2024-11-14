@@ -1,9 +1,9 @@
 'use server';
 import { redirect } from 'next/navigation';
 import { getSummonerDetails } from '../lib/api/data';
-import { RegionReadable } from '../lib/api/riotTypes';
-import { getRegionCode } from '../lib/api/typeFunctions';
-import { RiotID } from '../lib/api/types';
+import { RegionReadable } from '../lib/types';
+import { getRegionCode } from '../lib/helperFunctions';
+import { RiotID } from '../lib/types';
 
 export type FormState =
   // Success state

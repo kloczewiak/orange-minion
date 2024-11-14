@@ -1,17 +1,17 @@
 'use client';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 import { getMatchDetails } from '../lib/api/data';
-import { Cluster, Region } from '../lib/api/riotTypes';
-import { MatchDto, ParticipantDto } from '../lib/api/Match5VTypes';
+import { Cluster, Region } from '../lib/api/riot/riotTypes';
+import { MatchDto, ParticipantDto } from '../lib/api/riot/Match5VTypes';
 import { FullDate, LocalDate } from './helperClient';
 import { LookupContext } from './CommonGames';
-import { getReadableRegion } from '../lib/api/typeFunctions';
-import { RiotID } from '../lib/api/types';
+import { getReadableRegion } from '../lib/helperFunctions';
+import { RiotID } from '../lib/types';
 import Image from 'next/image';
 import {
   getAdjustedImageUrl,
   getChampionTileUrl,
-} from '../lib/api/helperFunctions';
+} from '../lib/helperFunctions';
 import { toOrdinal } from 'number-to-words';
 import { shimmerStyles } from './components';
 

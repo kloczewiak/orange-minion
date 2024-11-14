@@ -5,7 +5,7 @@ import { toOrdinal } from 'number-to-words';
 import { RegionSelect } from './regionSelect';
 import { FormState, action } from './CommonGamesFormAction';
 import Link from 'next/link';
-import { DualSearchHistoryItem } from '../lib/api/types';
+import { DualSearchHistoryItem } from '../lib/types';
 import { useRouter } from 'next/navigation';
 
 export function CommonGamesForm() {

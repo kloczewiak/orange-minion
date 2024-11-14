@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useEffect, useState } from 'react';
 import { getCommonMatchIDs, getPlayerPUUID } from '../lib/api/data';
-import { Champion, Item, Queue, Region } from '../lib/api/riotTypes';
-import { RiotID } from '../lib/api/types';
+import { Champion, Item, Queue, Region } from '../lib/api/riot/riotTypes';
+import { RiotID } from '../lib/types';
 import { CommonMatch, MatchSkeleton } from './SingleCommonMatch';
 import {
   getChampionsLookupTable,
@@ -10,7 +10,7 @@ import {
   getCluster,
   getItemsLookupTable,
   getQueuesLookupTable,
-} from '../lib/api/helperFunctions';
+} from '../lib/helperFunctions';
 import { StyledButton } from './components';
 
 type LookupContextType = {

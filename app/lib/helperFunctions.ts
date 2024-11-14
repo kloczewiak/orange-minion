@@ -1,3 +1,4 @@
+import { regionCodeMap, regionMap } from './constants';
 import {
   Champion,
   ChampionSkinTable,
@@ -6,7 +7,8 @@ import {
   Item,
   Queue,
   Region,
-} from './riotTypes';
+} from './api/riot/riotTypes';
+import { RegionReadable } from './types';
 
 export const getApiUrl = (region: Cluster | Region) =>
   `https://${region.toLowerCase()}.api.riotgames.com`;
@@ -95,6 +97,12 @@ export const getAdjustedImageUrl = (path: string): string => {
 
   return pathAdjusted;
 };
+
+export const getReadableRegion = (region: Region): RegionReadable =>
+  regionMap[region];
+
+export const getRegionCode = (regionReadable: RegionReadable): Region =>
+  regionCodeMap[regionReadable];
 
 export const getCluster = (region: Region): Cluster => {
   switch (region) {

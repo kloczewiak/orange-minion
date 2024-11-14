@@ -32,25 +32,6 @@ export type Region =
   | 'TW2'
   | 'VN2';
 
-export type RegionReadable =
-  | 'BR'
-  | 'EUNE'
-  | 'EUW'
-  | 'JP'
-  | 'KR'
-  | 'LAN'
-  | 'LAS'
-  | 'ME'
-  | 'NA'
-  | 'OCE'
-  | 'PH'
-  | 'RU'
-  | 'SG'
-  | 'TH'
-  | 'TR'
-  | 'TW'
-  | 'VN';
-
 export type SummonerDTO = {
   /**
    *

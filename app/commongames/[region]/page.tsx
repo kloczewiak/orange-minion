@@ -1,6 +1,6 @@
 import { getSummonerDetails } from '@/app/lib/api/data';
-import { RegionReadable } from '@/app/lib/api/riotTypes';
-import { getRegionCode } from '@/app/lib/api/typeFunctions';
+import { RegionReadable } from '@/app/lib/types';
+import { getRegionCode } from '@/app/lib/helperFunctions';
 import { CommonGames } from '@/app/ui/CommonGames';
 import {
   SummonerProfileCard,

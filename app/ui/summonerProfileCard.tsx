@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getSummonerDetails } from '../lib/api/data';
-import { Region } from '../lib/api/riotTypes';
-import { getSummonerIconUrl } from '../lib/api/helperFunctions';
+import { Region } from '../lib/api/riot/riotTypes';
+import { getSummonerIconUrl } from '../lib/helperFunctions';
 import { shimmerStyles } from './components';
 
 export const SummonerProfileCard = async ({

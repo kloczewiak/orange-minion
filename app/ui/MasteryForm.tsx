@@ -4,7 +4,7 @@ import { RegionSelect } from './regionSelect';
 import { useActionState, useEffect, useState } from 'react';
 import { FormState, action } from './MasteryFormAction';
 import { useRouter } from 'next/navigation';
-import { SearchHistoryItem } from '../lib/api/types';
+import { SearchHistoryItem } from '../lib/types';
 import Link from 'next/link';
 
 export function MasteryForm() {

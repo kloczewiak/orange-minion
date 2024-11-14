@@ -204,31 +204,41 @@ function Items({ itemIDs }: { itemIDs: number[] }) {
   return (
     <div
       className='grid grid-cols-4 grid-rows-2 gap-0.5 self-start flex-shrink-0'
-      style={{ direction: 'rtl' }}
+      style={{
+        // One more row than needed just in case
+        gridTemplateAreas: `'g3 g2 g1 g0' 'g7 g6 g5 g4' 'g11 g10 g9 g8'`,
+      }}
     >
       {itemIDs.map((itemID, index) => (
-        <Item key={index} itemID={itemID} />
+        <Item key={index} itemID={itemID} gridArea={'g' + index} />
       ))}
     </div>
   );
 }
 
-function Item({ itemID }: { itemID: number }) {
+function Item({ itemID, gridArea }: { itemID: number; gridArea?: string }) {
   if (itemID == 0) return null;
 
   const { items } = useContext(LookupContext);
   const itemLookup = items?.find((item) => item.id == itemID);
 
-  return itemLookup ? (
-    <Image
-      className='rounded-lg'
-      alt={itemLookup.name}
-      src={getAdjustedImageUrl(itemLookup.iconPath)}
-      width={30}
-      height={30}
-    />
-  ) : (
-    <div className='bg-gray-800 rounded-lg w-[30px] h-[30px]'>&nbsp;</div>
+  return (
+    <div
+      className='bg-gray-800 rounded-lg w-[30px] h-[30px]'
+      style={{ gridArea: gridArea }}
+    >
+      {itemLookup ? (
+        <Image
+          className='rounded-lg'
+          alt={itemLookup.name}
+          src={getAdjustedImageUrl(itemLookup.iconPath)}
+          width={30}
+          height={30}
+        />
+      ) : (
+        <>&nbsp;</>
+      )}
+    </div>
   );
 }
 

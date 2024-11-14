@@ -216,9 +216,10 @@ function Item({ itemID }: { itemID: number }) {
 
   const { items } = useContext(LookupContext);
   const itemLookup = items?.find((item) => item.id == itemID);
+  const itemPathSplit = itemLookup?.iconPath.split('/');
   const itemPath =
-    `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/items/icons2d/` +
-    itemLookup?.iconPath.split('/').slice(-1)[0].toLowerCase();
+    `https://raw.communitydragon.org/latest/plugins/rcp-be-${itemPathSplit?.[1]}/global/default/` +
+    itemPathSplit?.slice(3).join('/').toLowerCase();
 
   return itemLookup ? (
     <Image

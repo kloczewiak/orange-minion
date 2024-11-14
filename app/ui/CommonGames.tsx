@@ -6,6 +6,7 @@ import { RiotID } from '../lib/api/types';
 import { CommonMatch, MatchSkeleton } from './SingleCommonMatch';
 import {
   getChampionsLookupTable,
+  getSwarmChampionLookupTable,
   getCluster,
   getItemsLookupTable,
   getQueuesLookupTable,
@@ -54,7 +55,9 @@ export function CommonGames({
 
     getItemsLookupTable().then((d) => setItemsLookup(d));
     getQueuesLookupTable().then((d) => setQueuesLookup(d));
-    getChampionsLookupTable().then((d) => setChampionsLookup(d));
+    getChampionsLookupTable().then((d) =>
+      setChampionsLookup([...d, ...getSwarmChampionLookupTable()]),
+    );
 
     const puuidPromises = [summoner1, summoner2].map((summoner) =>
       getPlayerPUUID(summoner.gameName, summoner.tagline),

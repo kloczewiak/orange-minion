@@ -149,7 +149,7 @@ function Player({ data }: { data: ParticipantDto }) {
             data.item4,
             data.item5,
             data.item6,
-          ]}
+          ].filter((id) => id != 0)}
         />
       </div>
     </div>

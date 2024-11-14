@@ -103,7 +103,7 @@ async function MasteryBanner({
         alt={`Mastery level ${championLevel} border`}
         className='-mt-10 -mb-2'
         width={140}
-        height={140}
+        height={109}
       />
       {championLevel > 10 && (
         <>
@@ -112,7 +112,7 @@ async function MasteryBanner({
             alt={`Mastery level ${championLevel} plate`}
             className='-mt-5'
             width={44}
-            height={44}
+            height={15}
           />
           <p className='-mt-4 text-[#4D330C] text-xs font-black'>
             {championLevel}

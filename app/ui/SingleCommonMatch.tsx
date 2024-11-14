@@ -168,7 +168,9 @@ function Champion({
     (champion) => champion.id == championId,
   );
 
-  const [championImageUrl, setChampionImageUrl] = useState<string>();
+  const [championImageUrl, setChampionImageUrl] = useState<string>(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png',
+  );
 
   useEffect(() => {
     const run = async () => {
@@ -183,10 +185,7 @@ function Champion({
       <Image
         className='rounded-lg'
         alt={championLookup.name}
-        src={
-          championImageUrl ||
-          'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png'
-        }
+        src={championImageUrl}
         width={62}
         height={62}
       />

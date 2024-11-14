@@ -1,7 +1,7 @@
 'use server';
-import { getSummonerDetails } from '../lib/api/data';
-import { getRegionCode } from '../lib/helperFunctions';
-import { RegionReadable, RiotID } from '../lib/types';
+import { getSummonerDetails } from '@/app/lib/api/data';
+import { getRegionCode } from '@/app/lib/helperFunctions';
+import { RegionReadable, RiotID } from '@/app/lib/types';
 
 export type FormState =
   // Success state

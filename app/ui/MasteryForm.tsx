@@ -1,8 +1,8 @@
 'use client';
+import { SearchHistoryItem } from '@/app/lib/types';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useActionState, useEffect, useState } from 'react';
-import { SearchHistoryItem } from '../lib/types';
 import { Container, StyledButton, StyledInput } from './components';
 import { FormState, action } from './MasteryFormAction';
 import { RegionSelect } from './regionSelect';

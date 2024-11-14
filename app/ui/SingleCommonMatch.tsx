@@ -1,15 +1,15 @@
 'use client';
-import Image from 'next/image';
-import { toOrdinal } from 'number-to-words';
-import { ReactNode, useContext, useEffect, useState } from 'react';
-import { getMatchDetails } from '../lib/api/data';
-import { MatchDto, ParticipantDto } from '../lib/api/riot/Match5VTypes';
-import { Cluster, Region } from '../lib/api/riot/riotTypes';
+import { getMatchDetails } from '@/app/lib/api/data';
+import { MatchDto, ParticipantDto } from '@/app/lib/api/riot/Match5VTypes';
+import { Cluster, Region } from '@/app/lib/api/riot/riotTypes';
 import {
   getAdjustedImageUrl,
   getChampionTileUrl,
   getReadableRegion,
-} from '../lib/helperFunctions';
+} from '@/app/lib/helperFunctions';
+import Image from 'next/image';
+import { toOrdinal } from 'number-to-words';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { LookupContext } from './CommonGames';
 import { shimmerStyles } from './components';
 import { FullDate } from './helperClient';

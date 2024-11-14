@@ -1,5 +1,5 @@
+import { CommonGamesForm } from '@/app/ui/CommonGamesForm';
 import { Metadata } from 'next';
-import { CommonGamesForm } from '../ui/CommonGamesForm';
 
 export const metadata: Metadata = {
   title: 'Shared Match History',

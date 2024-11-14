@@ -1,8 +1,8 @@
 'use client';
+import { allRegions } from '@/app/lib/constants';
+import { getReadableRegion } from '@/app/lib/helperFunctions';
+import { RegionReadable } from '@/app/lib/types';
 import { useEffect, useState } from 'react';
-import { allRegions } from '../lib/constants';
-import { getReadableRegion } from '../lib/helperFunctions';
-import { RegionReadable } from '../lib/types';
 import { StyledSelect } from './components';
 
 export function RegionSelect({ value }: { value?: RegionReadable }) {

@@ -1,8 +1,11 @@
+import { getMasteryForAccount } from '@/app/lib/api/data';
+import { ChampionMasteryDto, Region } from '@/app/lib/api/riot/riotTypes';
+import {
+  getChampionSummary,
+  getChampionTileUrl,
+} from '@/app/lib/helperFunctions';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import Image from 'next/image';
-import { getMasteryForAccount } from '../lib/api/data';
-import { ChampionMasteryDto, Region } from '../lib/api/riot/riotTypes';
-import { getChampionSummary, getChampionTileUrl } from '../lib/helperFunctions';
 import { shimmerStyles } from './components';
 import { LocalDate } from './helperClient';
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toOrdinal } from 'number-to-words';
 import { useActionState, useEffect, useState } from 'react';
-import { DualSearchHistoryItem } from '../lib/types';
+import { DualSearchHistoryItem } from '@/app/lib/types';
 import { FormState, action } from './CommonGamesFormAction';
 import { Container, StyledButton, StyledInput } from './components';
 import { RegionSelect } from './regionSelect';

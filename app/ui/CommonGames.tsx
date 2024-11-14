@@ -1,15 +1,15 @@
 'use client';
-import { createContext, useEffect, useState } from 'react';
-import { getCommonMatchIDs, getPlayerPUUID } from '../lib/api/data';
-import { Champion, Item, Queue, Region } from '../lib/api/riot/riotTypes';
+import { getCommonMatchIDs, getPlayerPUUID } from '@/app/lib/api/data';
+import { Champion, Item, Queue, Region } from '@/app/lib/api/riot/riotTypes';
 import {
   getChampionsLookupTable,
   getCluster,
   getItemsLookupTable,
   getQueuesLookupTable,
   getSwarmChampionLookupTable,
-} from '../lib/helperFunctions';
-import { RiotID } from '../lib/types';
+} from '@/app/lib/helperFunctions';
+import { RiotID } from '@/app/lib/types';
+import { createContext, useEffect, useState } from 'react';
 import { StyledButton } from './components';
 import { CommonMatch, MatchSkeleton } from './SingleCommonMatch';
 

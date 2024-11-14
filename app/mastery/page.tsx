@@ -1,5 +1,5 @@
+import { MasteryForm } from '@/app/ui/MasteryForm';
 import { Metadata } from 'next';
-import { MasteryForm } from '../ui/MasteryForm';
 
 export const metadata: Metadata = {
   title: 'Mastery Showcase',

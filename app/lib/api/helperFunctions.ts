@@ -71,13 +71,19 @@ export const getChampionTileUrl = async (
 
   const championSkinTable = skinTable.skins[0];
 
-  const adjustedPath =
-    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/' +
-    championSkinTable.tilePath
-      .toLowerCase()
-      .replace('/lol-game-data/assets/', '');
+  return getAdjustedImageUrl(championSkinTable.tilePath);
+};
 
-  return adjustedPath;
+export const getAdjustedImageUrl = (path: string): string => {
+  const pathSplit = path.split('/');
+
+  const pathAdjusted =
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-' +
+    pathSplit[1].toLowerCase() +
+    '/global/default/' +
+    pathSplit.slice(3).join('/').toLowerCase();
+
+  return pathAdjusted;
 };
 
 export const getCluster = (region: Region): Cluster => {

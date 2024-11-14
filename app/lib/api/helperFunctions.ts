@@ -53,10 +53,14 @@ export const getChampionSummary = async (
 export const getChampionSkinTable = async (
   championId: number,
 ): Promise<ChampionSkinTable> => {
-  const response = await fetch(
-    `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/${championId}.json`,
-    { next: { revalidate: 60 * 60 * 24 } },
-  );
+  const jsonPath =
+    championId < 3000
+      ? `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/${championId}.json`
+      : `https://raw.communitydragon.org/14.18/plugins/rcp-be-lol-game-data/global/default/v1/champions/${championId}.json`;
+
+  const response = await fetch(jsonPath, {
+    next: { revalidate: 60 * 60 * 24 },
+  });
 
   if (!response.ok)
     throw new Error('Failed to fetch champion skin lookup table.');
@@ -71,7 +75,13 @@ export const getChampionTileUrl = async (
 
   const championSkinTable = skinTable.skins[0];
 
-  return getAdjustedImageUrl(championSkinTable.tilePath);
+  let adjustedUrl = getAdjustedImageUrl(championSkinTable.tilePath);
+
+  if (championId > 3000) {
+    adjustedUrl = adjustedUrl.replace('latest', '14.18');
+  }
+
+  return adjustedUrl;
 };
 
 export const getAdjustedImageUrl = (path: string): string => {

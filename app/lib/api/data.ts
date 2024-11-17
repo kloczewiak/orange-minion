@@ -45,6 +45,32 @@ export async function getAccount(
   return json;
 }
 
+export async function getAccountByPUUID(puuid: string): Promise<AccountDto> {
+  const response = await fetch(
+    `${getApiUrl('EUROPE')}/riot/account/v1/accounts/by-puuid/${puuid}`,
+    { ...getFetchConfig(), ...{ cache: 'force-cache' } },
+  );
+
+  if (!response.ok) {
+    console.error(
+      'getAccountByPUUID failed with response:',
+      await response.json(),
+    );
+    if (response.status === 404) {
+      throw new Error(`Account with PUUID ${puuid} not found.`, {
+        cause: response.status,
+      });
+    }
+    throw new Error('Failed to fetch account data.', {
+      cause: response.status,
+    });
+  }
+
+  const json = await response.json();
+
+  return json;
+}
+
 export async function getSummoner(
   encryptedPUUID: string,
   region: Region,
@@ -76,6 +102,30 @@ export async function getSummonerDetails(
     tagLine: tag,
     gameName: name,
   } = await getAccount(gameName, tagline);
+
+  try {
+    const { profileIconId, summonerLevel } = await getSummoner(puuid, region);
+
+    return {
+      tagline: tag,
+      gameName: name,
+      profileIconId,
+      summonerLevel,
+    };
+  } catch (e) {
+    const err = e as Error;
+    throw new Error(
+      `Summoner was not found for ${name}#${tag} on ${getReadableRegion(region) ?? region} server.`,
+      { cause: err.cause },
+    );
+  }
+}
+
+export async function getSummonerDetailsByPUUID(
+  puuid: string,
+  region: Region,
+): Promise<SummonerDetails> {
+  const { tagLine: tag, gameName: name } = await getAccountByPUUID(puuid);
 
   try {
     const { profileIconId, summonerLevel } = await getSummoner(puuid, region);

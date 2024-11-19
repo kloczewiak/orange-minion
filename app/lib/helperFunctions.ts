@@ -6,9 +6,11 @@ import {
   Item,
   Queue,
   Region,
+  SummonerSpell,
 } from './api/riot/riotTypes';
 import { regionCodeMap, regionMap } from './constants';
 import { RegionReadable } from './types';
+import { Perk, PerkStyles } from './perkTypes';
 
 export const getApiUrl = (region: Cluster | Region) =>
   `https://${region.toLowerCase()}.api.riotgames.com`;
@@ -164,6 +166,45 @@ export async function getChampionsLookupTable(): Promise<Champion[]> {
 
   if (!response.ok) {
     throw new Error('Failed to get champions lookup table.');
+  }
+
+  return await response.json();
+}
+
+export async function getSummonerSpellLookupTable(): Promise<SummonerSpell[]> {
+  const response = await fetch(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json',
+    { next: { revalidate: 60 * 60 * 24 } },
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to get summoner spell lookup table.');
+  }
+
+  return await response.json();
+}
+
+export async function getPerksLookupTable(): Promise<Perk[]> {
+  const response = await fetch(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perks.json',
+    { next: { revalidate: 60 * 60 * 24 } },
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to get perks lookup table.');
+  }
+
+  return await response.json();
+}
+
+export async function getPerkStylesLookupTable(): Promise<PerkStyles> {
+  const response = await fetch(
+    'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perkstyles.json',
+    { next: { revalidate: 60 * 60 * 24 } },
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to get perk styles lookup table.');
   }
 
   return await response.json();

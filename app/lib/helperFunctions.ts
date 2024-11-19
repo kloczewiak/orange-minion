@@ -1,3 +1,4 @@
+import { toOrdinal } from 'number-to-words';
 import {
   Champion,
   ChampionSkinTable,
@@ -8,9 +9,14 @@ import {
   Region,
   SummonerSpell,
 } from './api/riot/riotTypes';
-import { regionCodeMap, regionMap } from './constants';
-import { RegionReadable } from './types';
+import {
+  arenaTeamColorMap,
+  arenaTeamNameMap,
+  regionCodeMap,
+  regionMap,
+} from './constants';
 import { Perk, PerkStyles } from './perkTypes';
+import { ColorStyles, RegionReadable } from './types';
 
 export const getApiUrl = (region: Cluster | Region) =>
   `https://${region.toLowerCase()}.api.riotgames.com`;
@@ -217,4 +223,34 @@ export function getSwarmChampionLookupTable(): Champion[] {
   const data: Champion[] = JSON.parse(json);
 
   return data;
+}
+
+type TeamStyles = {
+  winText: string;
+  teamColor: ColorStyles;
+  teamText?: {
+    placement: string;
+    teamName: string;
+  };
+};
+
+export function getTeamStyles(win: boolean, subteamID: number = 0): TeamStyles {
+  if (subteamID) {
+    const placement = `${toOrdinal(subteamID)} Place`;
+    const teamName = arenaTeamNameMap[subteamID];
+
+    return {
+      winText: `Team ${teamName} - ${placement}`,
+      teamColor: arenaTeamColorMap[subteamID],
+      teamText: {
+        placement,
+        teamName,
+      },
+    };
+  }
+
+  return {
+    winText: win ? 'Victorious' : 'Defeated',
+    teamColor: arenaTeamColorMap[win ? 3 : 4],
+  };
 }

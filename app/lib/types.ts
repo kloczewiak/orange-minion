@@ -38,3 +38,9 @@ export type RegionReadable =
   | 'TR'
   | 'TW'
   | 'VN';
+
+export type ColorStyles = {
+  bg: string;
+  bgBright: string;
+  text: string;
+};

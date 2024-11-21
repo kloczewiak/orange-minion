@@ -1,6 +1,7 @@
 import { getSummonerDetails } from '@/app/lib/api/data';
 import { getRegionCode } from '@/app/lib/helperFunctions';
 import { RegionReadable } from '@/app/lib/types';
+import { BackButton } from '@/app/ui/BackButton';
 import { MasteryCardSkeletonList, MasteryList } from '@/app/ui/MasteryCard';
 import {
   SummonerProfileCard,
@@ -41,6 +42,11 @@ export default async function Page(props: Props) {
 
   return (
     <div>
+      <div className='mt-4 flex flex-col items-center'>
+        <BackButton maxWidth='32rem' href={'/mastery'}>
+          Go back
+        </BackButton>
+      </div>
       <div className='mt-4 flex justify-around gap-2 sm:justify-center sm:gap-8'>
         <Suspense fallback={<SummonerProfileCardSkeleton />}>
           <SummonerProfileCard

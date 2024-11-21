@@ -1,6 +1,7 @@
 import { getSummonerDetails } from '@/app/lib/api/data';
 import { getRegionCode } from '@/app/lib/helperFunctions';
 import { RegionReadable } from '@/app/lib/types';
+import { BackButton } from '@/app/ui/BackButton';
 import { CommonGames } from '@/app/ui/CommonGames';
 import {
   SummonerProfileCard,
@@ -70,6 +71,11 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <div className='py-6'>
+      <div className='flex flex-col items-center mb-6'>
+        <BackButton maxWidth='48rem' href={'/commongames'}>
+          Go back
+        </BackButton>
+      </div>
       <div className='flex flex-col items-start w-fit mx-auto sm:flex-row gap-4'>
         {players.map(({ gameName, tagline }) => (
           <Suspense

@@ -138,7 +138,9 @@ function Player({ data }: { data: ParticipantDto }) {
   };
 
   return (
-    <div className={`rounded-2xl p-2 ${bgColorMap[winStatus]} flex flex-col`}>
+    <div
+      className={`rounded-2xl p-2 ${bgColorMap[winStatus]} flex flex-col gap-1`}
+    >
       <div className='flex justify-between'>
         {data.riotIdGameName ? (
           <p>
@@ -150,7 +152,7 @@ function Player({ data }: { data: ParticipantDto }) {
         )}
         <p className={`${textColorMap[winStatus]}`}>{winText}</p>
       </div>
-      <div className='flex justify-between items-end flex-1 mt-1'>
+      <div className='flex justify-between items-end flex-1'>
         <Champion championId={data.championId}>
           <p>
             <span className='text-green-500'>{data.kills}</span> /{' '}
@@ -221,10 +223,9 @@ function Champion({
 function Items({ itemIDs }: { itemIDs: number[] }) {
   return (
     <div
-      className='grid grid-cols-4 grid-rows-2 gap-0.5 self-start flex-shrink-0'
+      className='grid grid-cols-4 grid-rows-2 gap-0.5 flex-shrink-0'
       style={{
-        // One more row than needed just in case
-        gridTemplateAreas: `'g3 g2 g1 g0' 'g7 g6 g5 g4' 'g11 g10 g9 g8'`,
+        gridTemplateAreas: `'g3 g2 g1 g0' 'g7 g6 g5 g4'`,
       }}
     >
       {itemIDs.map((itemID, index) => (

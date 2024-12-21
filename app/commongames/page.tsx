@@ -2,6 +2,8 @@ import { CommonGamesForm } from '@/app/ui/CommonGamesForm';
 import { Metadata } from 'next';
 import { BackButton } from '../ui/BackButton';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Shared Match History',
   description:

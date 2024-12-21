@@ -2,6 +2,8 @@ import { MasteryForm } from '@/app/ui/MasteryForm';
 import { Metadata } from 'next';
 import { BackButton } from '../ui/BackButton';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Mastery Showcase',
   description:
